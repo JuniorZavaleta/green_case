@@ -20,20 +20,6 @@ class CreateComplaintStateRecordTable extends Migration
             $table->integer('complaint_state_id')->unsigned();
             $table->timestamps();
         });
-
-        Schema::table('complaint_state_record', function (Blueprint $table){
-            $table->foreign('complaint_id')
-                ->references('id')
-                ->on('complaints')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('complaint_state_id')
-                ->references('id')
-                ->on('complaint_states')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-        });
     }
 
     /**

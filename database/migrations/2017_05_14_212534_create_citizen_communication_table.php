@@ -20,20 +20,6 @@ class CreateCitizenCommunicationTable extends Migration
             $table->string('account_id');
             $table->timestamps();
         });
-
-        Schema::table('citizen_communication', function (Blueprint $table){
-            $table->foreign('citizen_id')
-                ->references('id')
-                ->on('citizens')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('type_communication_id')
-                ->references('id')
-                ->on('types_communication')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-        });
     }
 
     /**

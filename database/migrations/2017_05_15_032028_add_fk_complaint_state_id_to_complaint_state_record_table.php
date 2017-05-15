@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuthoritiesTable extends Migration
+class AddFkComplaintStateIdToComplaintStateRecordTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,10 @@ class CreateAuthoritiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('authorities', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->integer('district_id')->unsigned();
-            $table->string('name', 20);
-            $table->timestamps();
-        });
-
-        Schema::table('authorities', function (Blueprint $table){
-            $table->foreign('id')
+        Schema::table('complaint_state_record', function (Blueprint $table) {
+            $table->foreign('complaint_state_id')
                 ->references('id')
-                ->on('users')
+                ->on('complaint_states')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -36,6 +29,8 @@ class CreateAuthoritiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authorities');
+        Schema::table('complaint_state_record', function (Blueprint $table) {
+            $table->dropForeign('complaint_state_record_complaint_state_id_foreign');
+        });
     }
 }
