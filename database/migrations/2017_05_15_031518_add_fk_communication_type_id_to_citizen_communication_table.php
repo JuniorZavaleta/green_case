@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFkTypeCommunicationIdToCitizenCommunicationTable extends Migration
+class AddFkCommunicationTypeIdToCitizenCommunicationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class AddFkTypeCommunicationIdToCitizenCommunicationTable extends Migration
     public function up()
     {
         Schema::table('citizen_communication', function (Blueprint $table) {
-            $table->foreign('type_communication_id')
+            $table->foreign('communication_type_id')
                 ->references('id')
-                ->on('types_communication')
+                ->on('communication_types')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -30,7 +30,7 @@ class AddFkTypeCommunicationIdToCitizenCommunicationTable extends Migration
     public function down()
     {
         Schema::table('citizen_communication', function (Blueprint $table) {
-            $table->dropForeign('citizen_communication_type_communication_id_foreign');
+            $table->dropForeign('citizen_communication_communication_type_id_foreign');
         });
     }
 }

@@ -16,7 +16,7 @@ class CreateCitizenCommunicationTable extends Migration
         Schema::create('citizen_communication', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('citizen_id')->unsigned();
-            $table->integer('type_communication_id')->unsigned();
+            $table->integer('communication_type_id')->unsigned();
             $table->string('account_id');
             $table->timestamps();
         });

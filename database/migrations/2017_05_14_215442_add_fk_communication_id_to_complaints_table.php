@@ -16,7 +16,7 @@ class AddFkCommunicationIdToComplaintsTable extends Migration
         Schema::table('complaints', function (Blueprint $table) {
             $table->foreign('type_communication_id')
                 ->references('id')
-                ->on('types_communication')
+                ->on('communication_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

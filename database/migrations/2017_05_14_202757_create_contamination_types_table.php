@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypesCommunicationTable extends Migration
+class CreateContaminationTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTypesCommunicationTable extends Migration
      */
     public function up()
     {
-        Schema::create('types_communication', function (Blueprint $table) {
+        Schema::create('contamination_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description', 20);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTypesCommunicationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types_communication');
+        Schema::dropIfExists('contamination_types');
     }
 }

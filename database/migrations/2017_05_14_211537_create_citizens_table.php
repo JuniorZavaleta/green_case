@@ -14,17 +14,9 @@ class CreateCitizensTable extends Migration
     public function up()
     {
         Schema::create('citizens', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->increments('id');
             $table->string('name', 20);
             $table->timestamps();
-        });
-
-        Schema::table('citizens', function (Blueprint $table){
-            $table->foreign('id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
     }
 

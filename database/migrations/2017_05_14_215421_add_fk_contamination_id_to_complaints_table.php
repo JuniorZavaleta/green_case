@@ -16,7 +16,7 @@ class AddFkContaminationIdToComplaintsTable extends Migration
         Schema::table('complaints', function (Blueprint $table) {
             $table->foreign('type_contamination_id')
                 ->references('id')
-                ->on('types_contamination')
+                ->on('contamination_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

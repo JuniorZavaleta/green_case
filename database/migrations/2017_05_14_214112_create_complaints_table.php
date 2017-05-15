@@ -21,10 +21,9 @@ class CreateComplaintsTable extends Migration
             $table->integer('type_communication_id')->unsigned();
             $table->integer('complaint_state_id')->unsigned();
             $table->float('latitude');
-            $table->float('length');
-            $table->date('claim_date');
+            $table->float('longitude');
             $table->string('commentary');
-            $table->date('status_date');
+            $table->date('date_status_updated');
             $table->timestamps();
         });
     }
