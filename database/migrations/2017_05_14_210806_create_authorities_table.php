@@ -19,14 +19,6 @@ class CreateAuthoritiesTable extends Migration
             $table->string('name', 20);
             $table->timestamps();
         });
-
-        Schema::table('authorities', function (Blueprint $table){
-            $table->foreign('id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-        });
     }
 
     /**
