@@ -20,10 +20,10 @@ class CreateComplaintsTable extends Migration
             $table->integer('type_contamination_id')->unsigned();
             $table->integer('type_communication_id')->unsigned();
             $table->integer('complaint_state_id')->unsigned();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->string('commentary')->nullable();
-            $table->date('date_status_updated');
+            $table->date('date_status_updated')->nullable();
             $table->timestamps();
         });
     }
