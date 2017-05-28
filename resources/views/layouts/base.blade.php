@@ -10,16 +10,13 @@
     <!-- page title -->
     <title>GreenCase</title>
     <!-- bootstrap css -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <!-- css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/nouislider.css') }}" rel="stylesheet">
-    <!-- fonts -->
-    <link href="{{ asset('css/font.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/FontAwesome.otf') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/linear-icons.css') }}">
+    <link href="{{ asset('css/forms.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
 </head>
 
 <body style="overflow: visible;">
