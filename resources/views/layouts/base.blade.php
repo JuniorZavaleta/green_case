@@ -10,16 +10,16 @@
     <!-- page title -->
     <title>GreenCase</title>
     <!-- bootstrap css -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- css -->
-    <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/animate.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/css/nouislider.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/nouislider.css') }}" rel="stylesheet">
     <!-- fonts -->
-    <link href="{{ URL::asset('css/font.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ URL::asset('css/FontAwesome.otf') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ URL::asset('css/linear-icons.css') }}">
+    <link href="{{ asset('css/font.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/FontAwesome.otf') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/linear-icons.css') }}">
 </head>
 
 <body style="overflow: visible;">
@@ -79,13 +79,13 @@
 </section>
 <!-- / content -->
 
-<script src="{{ URL::asset('js/jquery.min.js') }}"></script>
-<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ URL::asset('js/jquery.easing.min.js') }}"></script>
-<script src="{{ URL::asset('js/scrolling-nav.js') }}"></script>
-<script src="{{ URL::asset('js/nouislider.min.js') }}"></script>
-<script src="{{ URL::asset('js/jquery.shuffle.min.js') }}"></script>
-<script src="{{ URL::asset('js/custom.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.easing.min.js') }}"></script>
+<script src="{{ asset('js/scrolling-nav.js') }}"></script>
+<script src="{{ asset('js/nouislider.min.js') }}"></script>
+<script src="{{ asset('js/jquery.shuffle.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
 
 </body>
 </html>
