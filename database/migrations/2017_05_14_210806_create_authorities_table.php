@@ -16,7 +16,7 @@ class CreateAuthoritiesTable extends Migration
         Schema::create('authorities', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->integer('district_id')->unsigned();
-            $table->string('name', 20);
+            $table->string('name', 100);
             $table->timestamps();
         });
     }
