@@ -13,5 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CommunicationTypesSeeder::class);
         $this->call(ContaminationTypesSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(DistrictsSeeder::class);
+        $this->call(AuthoritiesSeeder::class);
+        $this->call(ComplaintStatesSeeder::class);
     }
 }
