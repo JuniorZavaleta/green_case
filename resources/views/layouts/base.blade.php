@@ -1,3 +1,8 @@
+@php
+    $admin = Auth::guard('admin')->user();
+    $is_admin = $admin != null;
+    $user = $is_admin ? $admin : Auth::guard('web')->user();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,15 +45,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        @if (Auth::guest())
-                        @else
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+                    @if ($user)
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
                             <li><a href="#">My Account</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
-                        @endif
+                    @endif
                     </li>
                 </ul>
             </div><!--/ nav-collapse -->
@@ -61,7 +65,7 @@
 <section id="content">
     <div class="container">
         <div class="row">
-        @if (Auth::guest())
+        @if (!$is_admin)
             @yield('content')
         @else
             @include('layouts.main')
@@ -83,6 +87,5 @@
 <script src="{{ asset('js/nouislider.min.js') }}"></script>
 <script src="{{ asset('js/jquery.shuffle.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
-
 </body>
 </html>
