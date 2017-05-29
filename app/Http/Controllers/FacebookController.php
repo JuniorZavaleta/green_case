@@ -12,6 +12,12 @@ class FacebookController extends Controller
 {
     public function login()
     {
+        $user = Auth::guard('web')->user();
+
+        if ($user) {
+            return redirect('/');
+        }
+
         return view('app.auth.login');
     }
 
