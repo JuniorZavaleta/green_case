@@ -21,9 +21,6 @@ class Citizen extends Authenticatable
 
     public function complaints()
     {
-        return $this->hasMany(
-            Complaint::class,
-            'id'
-        );
+        return $this->hasMany(Complaint::class,'id');
     }
 }
