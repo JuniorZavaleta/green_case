@@ -18,4 +18,9 @@ class Citizen extends Authenticatable
             'communication_type_id'
         );
     }
+
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
+    }
 }

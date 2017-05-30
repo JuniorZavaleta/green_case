@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'complaint.index', 'uses' => 'ComplaintController@index']);
 
 Route::get('/login', ['as' => 'login', 'uses' => 'FacebookController@login']);
 Route::get('/facebook/login', ['as' => 'facebook.login', 'uses' => 'FacebookController@redirect']);

@@ -21,4 +21,9 @@ class Channel extends Model
             'citizen_id'
         );
     }
+
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
+    }
 }
