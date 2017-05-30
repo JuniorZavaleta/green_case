@@ -23,4 +23,6 @@ class Citizen extends Authenticatable
     {
         return $this->hasMany(Complaint::class,'id');
     }
+
+
 }
