@@ -21,33 +21,36 @@ class FacebookController extends Controller
         return view('app.auth.login');
     }
 
+    /**
+     * Redirect to facebook asking for permissions
+     * @return Redirect
+     */
     public function redirect()
     {
         return Socialite::driver('facebook')->redirect();
     }
 
+    /**
+     * Handle callback of Facebook
+     * @return Redirect
+     */
     public function callback()
     {
         // Get user from facebook
-        $facebook_user = Socialite::driver('facebook')->fields([
-            'first_name', 'email'
-        ])->user();
+        try {
+            $facebook_user = Socialite::driver('facebook')->fields([
+                'first_name', 'email'
+            ])->user();
+        } catch (\Exception $e) {
+            // Errors from permissions
+        }
 
         // Check if citizen with facebook_id already exists
-        $citizen = Citizen::whereHas('channels', function ($channel) use ($facebook_user) {
-            $channel->where('account_id', $facebook_user->id)
-                    ->where('communication_type_id', Channel::FACEBOOK);
-        })->first();
+        $citizen = Citizen::fromFacebook($facebook_user->id)->first();
 
         if (is_null($citizen)) {
             // Create if not exist
-            $citizen = Citizen::create([
-                'name' => $facebook_user->user['first_name']
-            ]);
-
-            $citizen->channels()->attach(Channel::find(Channel::FACEBOOK), [
-                'account_id' => $facebook_user->id
-            ]);
+            $citizen = Citizen::createWithFacebook($facebook_user);
         }
 
         Auth::login($citizen);
