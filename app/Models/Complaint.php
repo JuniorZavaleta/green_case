@@ -60,7 +60,7 @@ class Complaint extends Model
      */
     public function scopeCompleted($query)
     {
-        return $query->where('complaint_state_id', Complaint::COMPLETED);
+        return $query->where('complaint_state_id', static::COMPLETED);
     }
 
     /**
@@ -70,5 +70,10 @@ class Complaint extends Model
     public function getCreatedAtFormattedAttribute()
     {
         return $this->created_at->format('d/m/Y H:i:s');
+    }
+
+    public function getIsCompletedAttribute()
+    {
+        return $this->complaint_state_id == static::COMPLETED;
     }
 }

@@ -22,6 +22,9 @@
                 <td>
                     <a class="btn btn-default btn-xs" href="#">Ver detalle</a>
                     <a class="btn btn-default btn-xs" href="#">Ver actividades</a>
+                    @if ($complaint->is_completed)
+                    <a class="btn btn-info btn-xs" href="#">Evaluar</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
