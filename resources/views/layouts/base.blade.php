@@ -37,8 +37,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
-                    <img src="img/logo.png" alt="">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('img/logo.png') }}" alt="GreenCase">
                     <h1 class="title-logo">GreenCase</h1>
                 </a>
             </div><!-- / navbar-header -->
