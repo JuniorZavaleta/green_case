@@ -19,4 +19,8 @@ Route::get('/facebook/callback', ['as' => 'facebook.callback', 'uses' => 'Facebo
 
 Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
     Route::get('/casos', ['as' => 'admin.complaint.index', 'uses' => 'ComplaintController@index']);
+
+    Route::get('/login', ['as' => 'admin.login.form', 'uses' => function () {
+        return view('admin.auth.login');
+    }]);
 });

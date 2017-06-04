@@ -22,6 +22,12 @@
     <link href="{{ asset('css/forms.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
+    <style type="text/css">
+        button.btn-facebook { position: relative; top: 20px; }
+        @media only screen and (max-width: 767px) {
+            button.btn-facebook { top: 0px; }
+        }
+    </style>
 </head>
 
 <body style="overflow: visible;">
@@ -48,10 +54,11 @@
                     @if ($user)
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="#">My Account</a></li>
-                            <li role="separator" class="divider"></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
+                    @elseif (is_bool(strpos(Route::current()->uri, 'admin')))
+                        <!-- Always false if is bool, then is not admin -->
+                        <button onClick="javascript:window.location.href='{{ route('facebook.login') }}'" class="btn btn-facebook"><i class="fa fa-facebook"></i> Inicio con Facebook</button>
                     @endif
                     </li>
                 </ul>
