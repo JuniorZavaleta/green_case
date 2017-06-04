@@ -69,9 +69,15 @@ class Complaint extends Model
      */
     public function getCreatedAtFormattedAttribute()
     {
-        return $this->created_at->format('d/m/Y H:i:s');
+        if ($this->created_at) {
+            return $this->created_at->format('d/m/Y H:i:s');
+        }
     }
 
+    /**
+     * Return true is the status is completed
+     * @return bool
+     */
     public function getIsCompletedAttribute()
     {
         return $this->complaint_state_id == static::COMPLETED;
