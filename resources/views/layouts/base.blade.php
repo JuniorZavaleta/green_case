@@ -54,7 +54,11 @@
                     @if ($user)
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="#">Logout</a></li>
+                            @if ($is_admin)
+                            <li><a href="{{ route('admin.logout') }}">Logout</a></li>
+                            @else
+                            <li><a href="{{ route('citizen.logout') }}">Logout</a></li>
+                            @endif
                         </ul>
                     @elseif (is_bool(strpos(Route::current()->uri, 'admin')))
                         <!-- Always false if is bool, then is not admin -->

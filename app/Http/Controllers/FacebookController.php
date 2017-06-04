@@ -4,26 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Socialite;
+use Auth;
+
 use App\Models\Citizen;
 use App\Models\Channel;
-use Auth;
 
 class FacebookController extends Controller
 {
-    public function login()
-    {
-        $user = Auth::guard('web')->user();
-
-        if ($user) {
-            return redirect('/');
-        }
-
-        return view('app.auth.login');
-    }
-
     /**
      * Redirect to facebook asking for permissions
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function redirect()
     {
@@ -32,7 +22,7 @@ class FacebookController extends Controller
 
     /**
      * Handle callback of Facebook
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function callback()
     {
@@ -56,5 +46,16 @@ class FacebookController extends Controller
         Auth::login($citizen);
 
         return redirect('/')->with('message', 'OK');
+    }
+
+    /**
+     * Logout the session of citizen
+     * @return \Illuminate\Http\Response
+     */
+    protected function logout()
+    {
+        Auth::guard('web')->logout();
+
+        return redirect('/');
     }
 }

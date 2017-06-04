@@ -10,6 +10,13 @@ class Citizen extends Authenticatable
     protected $fillable = ['name'];
 
     /**
+     * The column name of the "remember me" token.
+     *
+     * @var string
+     */
+    protected $rememberTokenName = null;
+
+    /**
      * Relationship with channels Messenger, Telegram and Facebook-Web
      * @return Channel
      */
