@@ -10,13 +10,15 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
 use App\Models\Complaint;
 use App\Models\Authority;
-use App\Models\District;
-use Auth;
 
 class ListComplaintsTest extends TestCase
 {
     use DatabaseMigrations;
 
+    /**
+     * For all the tests seed the communication types, complaint states
+     * and contamination types
+     */
     public function setUp()
     {
         parent::setUp();

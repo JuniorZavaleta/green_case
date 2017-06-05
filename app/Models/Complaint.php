@@ -8,6 +8,10 @@ class Complaint extends Model
 {
     const INCOMPLETED = 1;
     const COMPLETED = 2;
+    const ACCEPTED = 3;
+    const REJECTED = 4;
+    const ON_ATTENTION = 5;
+    const ATTENDED = 6;
 
     /**
      * Relationship with the citizen
@@ -61,7 +65,17 @@ class Complaint extends Model
      */
     public function scopeCompleted($query)
     {
-        return $query->where('complaint_state_id', static::COMPLETED);
+        return $query->where('complaint_state_id', '!=' ,static::INCOMPLETED);
+    }
+
+    /**
+     * Filter for only get complaint completed
+     * @param  Builder $query before apply the filter
+     * @return Builder after apply the filter
+     */
+    public function scopeIncompleted($query)
+    {
+        return $query->where('complaint_state_id', static::INCOMPLETED);
     }
 
     /**
