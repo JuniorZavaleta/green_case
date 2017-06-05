@@ -10,8 +10,17 @@ class Channel extends Model
     const TELEGRAM = 2;
     const FACEBOOK = 3;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'communication_types';
 
+    /**
+     * Relationship with citizens
+     * @return Citizen
+     */
     public function citizens()
     {
         return $this->belongsToMany(
@@ -22,6 +31,10 @@ class Channel extends Model
         );
     }
 
+    /**
+     * Relationship with complaints
+     * @return Complaint
+     */
     public function complaints()
     {
         return $this->hasMany(Complaint::class);
