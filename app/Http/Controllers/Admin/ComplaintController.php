@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
+use Auth;
 
 /**
  * ComplaintController is a class that manage the complaints applying filters
@@ -22,7 +23,17 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        $complaints = Complaint::completed()->latest()->paginate(15);
+        $user = Auth::guard('admin')->user();
+
+        if ($user->is_admin) {
+            $query = new Complaint;
+        } else {
+            $query = Complaint::where('authority_id', $user->id)
+                ->completed()
+                ->latest();
+        }
+
+        $complaints = $query->paginate(15);
 
         return view('admin.complaints.index', compact('complaints'));
     }

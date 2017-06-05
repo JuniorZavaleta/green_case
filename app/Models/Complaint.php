@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Complaint extends Model
 {
+    const INCOMPLETED = 1;
     const COMPLETED = 2;
 
     /**

@@ -12,13 +12,48 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => bcrypt('secret'),
         'remember_token' => str_random(10),
+        'state' => 1,
+    ];
+});
+
+$factory->state(App\Models\User::class, 'admin', function () {
+    return [
+        'type_user' => 1,
+    ];
+});
+
+$factory->state(App\Models\User::class, 'authority', function () {
+    return [
+        'type_user' => 2,
+    ];
+});
+
+$factory->define(App\Models\District::class, function () {
+    return [
+        'name' => 'fake district',
+    ];
+});
+
+$factory->define(App\Models\Authority::class, function ($factory) {
+    return [
+        'id' => factory(App\Models\User::class)->states('authority')->create()->id,
+        'name' => 'test',
+        'district_id' => factory(App\Models\District::class)->create()->id,
+    ];
+});
+
+/**
+ * Function that create faker citizens
+ */
+$factory->define(App\Models\Citizen::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
     ];
 });

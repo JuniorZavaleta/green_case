@@ -23,4 +23,13 @@ class Authority extends Model
     {
         return $this->belongsTo(District::class);
     }
+
+    /**
+     * Relationship with user
+     * @return User
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
 }
