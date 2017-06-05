@@ -9,6 +9,15 @@ use Auth;
 use App\Models\Citizen;
 use App\Models\Channel;
 
+/**
+ * FacebookController is a class that ask for permissions on facebook,
+ * then handle the permissions and use it for authenticate citizens. *
+ * For the moment, for close the session of the citizen
+ *
+ * @package App\Http\Controllers
+ * @author Junior Zavaleta
+ * @version 1.0
+ */
 class FacebookController extends Controller
 {
     /**

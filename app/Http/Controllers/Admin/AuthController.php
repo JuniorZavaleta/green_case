@@ -9,6 +9,14 @@ use Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * AuthController is a class that handle login and logout of admin and
+ * authorities using AuthenticatesUsers trait
+ *
+ * @package App\Http\Controllers\Admin
+ * @author Junior Zavaleta
+ * @version 1.0
+ */
 class AuthController extends Controller
 {
     use AuthenticatesUsers;
