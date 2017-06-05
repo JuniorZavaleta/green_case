@@ -12,7 +12,7 @@
                 <div class="col-xs-3 col-xs-offset-1 col-sm-2">
                     <label class="control-label">Tipo de Contaminación</label>
                 </div>
-                <div class="col-xs-6 col-sm-8 col-lg-6">
+                <div class="col-xs-4 col-sm-6 col-lg-4">
                     <select class="form-control" name="contamination_type" id="contamination_type">
                         <option value="">Seleccione el tipo de contaminación</option>
                         @foreach($contamination_types as $type)
@@ -20,8 +20,50 @@
                         @endforeach
                     </select>
                 </div>
-
             </div>
+
+            <div class="form-group">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Ubicación</label>
+                </div>
+                <div id="map" class="col-xs-6 col-sm-8 col-lg-6"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Imagen 1</label>
+                </div>
+                <div class="col-xs-6 col-sm-8 col-lg-6">
+                    <input type="file" value="Upload Image">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Imagen 2</label>
+                </div>
+                <div class="col-xs-6 col-sm-8 col-lg-6">
+                    <input type="file" value="Upload Image">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Imagen 3</label>
+                </div>
+                <div class="col-xs-6 col-sm-8 col-lg-6">
+                    <input type="file" value="Upload Image">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Comentario</label>
+                </div>
+                <textarea rows="4" cols="50">
+                </textarea>
+            </div>
+
             <div class="form-group">
                 <div class="col-xs-6 col-xs-offset-1">
                     <button class="btn btn-primary" name="register_button" type="submit" value="register">Registrar</button>
