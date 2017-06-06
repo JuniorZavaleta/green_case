@@ -38,6 +38,11 @@ class ComplaintController extends Controller
         return view('admin.complaints.index', compact('complaints'));
     }
 
+    /**
+     * Show the complaint selected
+     * @param  Complaint $complaint complaint selected
+     * @return \Illuminate\Http\Response
+     */
     public function show(Complaint $complaint)
     {
         return view('admin.complaints.show', compact('complaint'));
