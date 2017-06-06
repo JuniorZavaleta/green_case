@@ -37,4 +37,9 @@ class ComplaintController extends Controller
 
         return view('admin.complaints.index', compact('complaints'));
     }
+
+    public function show(Complaint $complaint)
+    {
+        return view('admin.complaints.show', compact('complaint'));
+    }
 }

@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
 
     Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/casos', 'ComplaintController@index')->name('admin.complaint.index');
+        Route::get('/casos/{complaint}', 'ComplaintController@show')->name('admin.complaint.show');
 
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });
