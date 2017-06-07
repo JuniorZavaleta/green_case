@@ -12,6 +12,7 @@
                     <thead>
                         <th>Tipo de Contaminación</th>
                         <th>Distrito</th>
+                        <th>Estado</th>
                         <th>Fecha de registro</th>
                         <th>Acciones</th>
                     </thead>
@@ -20,6 +21,7 @@
                     <tr>
                         <td>{{ $complaint->contamination_type->description }}</td>
                         <td>{{ $complaint->authority->district->name }}</td>
+                        <td>{{ $complaint->status->description }}</td>
                         <td>{{ $complaint->created_at_formatted }}</td>
                         <td>
                             <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>

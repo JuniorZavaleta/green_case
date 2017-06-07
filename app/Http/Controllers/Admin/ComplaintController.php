@@ -25,12 +25,10 @@ class ComplaintController extends Controller
     {
         $user = Auth::guard('admin')->user();
 
-        if ($user->is_admin) {
-            $query = new Complaint;
-        } else {
-            $query = Complaint::where('authority_id', $user->id)
-                ->completed()
-                ->latest();
+        $query = Complaint::with('authority', 'contamination_type', 'status');
+
+        if (!$user->is_admin) {
+            $query->where('authority_id', $user->id)->completed()->latest();
         }
 
         $complaints = $query->paginate(15);

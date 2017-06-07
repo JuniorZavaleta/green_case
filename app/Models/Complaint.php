@@ -59,6 +59,15 @@ class Complaint extends Model
     }
 
     /**
+     * Relationship with the status (incompleto, registrado, etc)
+     * @return App\Models\ComplaintStatus
+     */
+    public function status()
+    {
+        return $this->belongsTo(ComplaintStatus::class, 'complaint_state_id');
+    }
+
+    /**
      * Filter for only get complaint completed
      * @param  Builder $query before apply the filter
      * @return Builder after apply the filter
