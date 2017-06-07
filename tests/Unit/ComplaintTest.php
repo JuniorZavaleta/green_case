@@ -32,17 +32,17 @@ class ComplaintTest extends TestCase
     {
         $authority = factory(Authority::class)->create();
         // Create 2 incompleted
-        factory(Complaint::class, 2)->create(['authority_id' => $authority->id, 'complaint_state_id' => Complaint::INCOMPLETED]);
+        factory(Complaint::class, 2)->create(['district_id' => $authority->id, 'complaint_state_id' => Complaint::INCOMPLETED]);
         // Create 2 completed
-        factory(Complaint::class, 2)->create(['authority_id' => $authority->id, 'complaint_state_id' => Complaint::COMPLETED]);
+        factory(Complaint::class, 2)->create(['district_id' => $authority->id, 'complaint_state_id' => Complaint::COMPLETED]);
         // Create 2 accepted
-        factory(Complaint::class, 2)->create(['authority_id' => $authority->id, 'complaint_state_id' => Complaint::ACCEPTED]);
+        factory(Complaint::class, 2)->create(['district_id' => $authority->id, 'complaint_state_id' => Complaint::ACCEPTED]);
         // Create 2 rejected
-        factory(Complaint::class, 2)->create(['authority_id' => $authority->id, 'complaint_state_id' => Complaint::REJECTED]);
+        factory(Complaint::class, 2)->create(['district_id' => $authority->id, 'complaint_state_id' => Complaint::REJECTED]);
         // Create 2 on attention
-        factory(Complaint::class, 2)->create(['authority_id' => $authority->id, 'complaint_state_id' => Complaint::ON_ATTENTION]);
+        factory(Complaint::class, 2)->create(['district_id' => $authority->id, 'complaint_state_id' => Complaint::ON_ATTENTION]);
         // Create 2 attended
-        factory(Complaint::class, 2)->create(['authority_id' => $authority->id, 'complaint_state_id' => Complaint::ATTENDED]);
+        factory(Complaint::class, 2)->create(['district_id' => $authority->id, 'complaint_state_id' => Complaint::ATTENDED]);
 
         $this->assertTrue(Complaint::completed()->count() == 10);
         $this->assertTrue(Complaint::incompleted()->count() == 2);
