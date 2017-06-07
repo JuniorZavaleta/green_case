@@ -22,6 +22,7 @@
                                 </select>
                             </div>
                         </div>
+                        @if ($user->is_admin)
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Distrito</label>
@@ -34,6 +35,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Tipo de contaminación</label>

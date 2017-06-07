@@ -22,20 +22,24 @@ use App\Models\ContaminationType;
 class ComplaintController extends Controller
 {
     /**
-     * List the last 15 complaints completed
+     * List the last 15 complaints completed applying filter like
+     *     Contamination type
+     *     Status
+     *     District
+     *     Registered between dates
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $user = Auth::guard('admin')->user();
         $status = ComplaintStatus::pluck('description', 'id');
-        $districts = District::orderBy('name')->pluck('name', 'id');
+        $districts = $user->is_admin ? District::orderBy('name')->pluck('name', 'id') : [];
         $contamination_types = ContaminationType::orderBy('description')->pluck('description', 'id');
 
         $query = Complaint::with('district', 'contamination_type', 'status');
 
         if (!$user->is_admin) {
-            $query->where('authority_id', $user->id)->completed()->latest();
+            $query->where('district_id', $user->authority->district->id)->completed()->latest();
         }
 
         if (request('distrito')) {
@@ -59,7 +63,7 @@ class ComplaintController extends Controller
         $complaints = $query->paginate(15);
 
         return view('admin.complaints.index', compact(
-            'complaints', 'status', 'districts', 'contamination_types'
+            'complaints', 'status', 'districts', 'contamination_types', 'user'
         ));
     }
 
