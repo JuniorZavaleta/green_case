@@ -51,7 +51,14 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <a class="btn btn-success pull-right" type="button" target="_blank" href="{{ route('admin.complaint.export', request()->all()) }}">Exportar</a>
+                            </div>
                         </div>
                     </div>
                 </form>
