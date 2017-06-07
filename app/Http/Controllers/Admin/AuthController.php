@@ -47,4 +47,19 @@ class AuthController extends Controller
     {
         return Auth::guard('admin');
     }
+
+    /**
+     * The user has been authenticated.
+     * Save the district id if the user is an authority (not admin)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return void
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->is_admin) {
+            session(['district_id' => $user->authority->district->id]);
+        }
+    }
 }

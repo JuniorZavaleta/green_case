@@ -39,7 +39,7 @@ class ComplaintController extends Controller
         $query = Complaint::with('district', 'contamination_type', 'status');
 
         if (!$user->is_admin) {
-            $query->where('district_id', $user->authority->district->id)->completed()->latest();
+            $query->where('district_id', session('district_id'))->completed()->latest();
         }
 
         if (request('distrito')) {
