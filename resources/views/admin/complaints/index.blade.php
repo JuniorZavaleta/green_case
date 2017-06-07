@@ -52,6 +52,30 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
+                                <label>Desde el dia</label>
+                                <div id="start_date" class="input-group date">
+                                    <input name="desde" type="text" class="form-control" value="{{ request('desde') }}">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Hasta el dia</label>
+                                <div id="end_date" class="input-group date">
+                                    <input name="hasta" type="text" class="form-control" value="{{ request('hasta') }}">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Filtrar</button>
                             </div>
                         </div>
@@ -111,3 +135,21 @@
   {{ $complaints->links() }}
 </div>
 @endsection
+
+@push('extra-scripts')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+<script type="text/javascript" src="{{ asset('js/moment-with-locales.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+<script type="text/javascript">
+$(function() {
+    $('#start_date').datetimepicker({
+        viewMode: 'days',
+        format: 'DD/MM/YYYY'
+    });
+    $('#end_date').datetimepicker({
+        viewMode: 'days',
+        format: 'DD/MM/YYYY'
+    });
+});
+</script>
+@endpush

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Auth;
+use Carbon\Carbon;
 
 use App\Models\Complaint;
 use App\Models\ComplaintStatus;
@@ -80,6 +81,18 @@ class ComplaintController extends Controller
             $query->whereHas('status', function ($q) {
                 $q->where('description', request('estado'));
             });
+        }
+
+        if (request('desde')) {
+            $from = Carbon::createFromFormat('d/m/Y', request('desde'))->startOfDay();
+
+            $query->where('created_at', '>=', $from);
+        }
+
+        if (request('hasta')) {
+            $to = Carbon::createFromFormat('d/m/Y', request('hasta'))->endOfDay();
+
+            $query->where('created_at', '<=', $to);
         }
 
         $query->latest('complaints.id');
