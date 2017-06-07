@@ -13,12 +13,11 @@
                         <div class="panel-title">Información General</div>
                     </div>
                     <div class="panel-body">
-                        <p>Enviado desde: {{ $complaint->channel->description }}</p>
-                        <p>Tipo de contaminación: {{ $complaint->contamination_type->description }}</p>
-                        <p>Fecha y Hora de registro: {{ $complaint->created_at_formatted }}</p>
-                        @if ($complaint->commentary)
-                        <textarea readonly="readonly">{{ $complaint->commentary }}</textarea>
-                        @endif
+                        <p><b>Enviado desde</b>: {{ $complaint->channel->description }}</p>
+                        <p><b>Tipo de contaminación</b>: {{ $complaint->contamination_type->description }}</p>
+                        <p><b>Fecha y Hora de registro</b>: {{ $complaint->created_at_formatted }}</p>
+                        <p><b>Comentarios del ciudadano</b>:</p>
+                        <p>{{ $complaint->commentary }}</p>
                     </div>
                 </div>
                 <hr></hr>
