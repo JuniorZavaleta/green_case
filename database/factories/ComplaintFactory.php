@@ -8,7 +8,7 @@ $factory->define(App\Models\Complaint::class, function (Faker\Generator $faker, 
 
     return [
         'citizen_id' => $citizen->id,
-        'authority_id' => $faker->numberBetween(2, 44),
+        'district_id' => $faker->numberBetween(1, 43),
         'type_contamination_id' => $faker->numberBetween(1, 6),
         'latitude' => 12.234,
         'longitude' => 21.234,
