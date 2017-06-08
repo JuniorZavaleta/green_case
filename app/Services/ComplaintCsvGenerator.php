@@ -2,6 +2,11 @@
 
 namespace App\Services;
 
+/**
+ * Csv generator for complaints
+ * @author Junior Zavaleta
+ * @version 1.0
+ */
 class ComplaintCsvGenerator extends CsvGenerator
 {
     public function __construct()
