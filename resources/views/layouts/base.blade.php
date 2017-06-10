@@ -103,5 +103,8 @@
 <script src="{{ asset('js/nouislider.min.js') }}"></script>
 <script src="{{ asset('js/jquery.shuffle.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+
+@stack('extra-scripts')
+
 </body>
 </html>

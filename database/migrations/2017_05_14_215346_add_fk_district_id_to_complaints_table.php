@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFkAuthorityIdToComplaintsTable extends Migration
+class AddFkDistrictIdToComplaintsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class AddFkAuthorityIdToComplaintsTable extends Migration
     public function up()
     {
         Schema::table('complaints', function (Blueprint $table) {
-            $table->foreign('authority_id')
+            $table->foreign('district_id')
                 ->references('id')
-                ->on('authorities')
+                ->on('districts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -30,7 +30,7 @@ class AddFkAuthorityIdToComplaintsTable extends Migration
     public function down()
     {
         Schema::table('complaints', function (Blueprint $table) {
-            $table->dropForeign('complaints_authority_id_foreign');
+            $table->dropForeign('complaints_district_id_foreign');
         });
     }
 }

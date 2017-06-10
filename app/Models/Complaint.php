@@ -32,12 +32,12 @@ class Complaint extends Model
     }
 
     /**
-     * Relationship with the authority assigned
-     * @return App\Models\Authority
+     * Relationship with the district assigned
+     * @return App\Models\District
      */
-    public function authority()
+    public function district()
     {
-        return $this->belongsTo(Authority::class);
+        return $this->belongsTo(District::class);
     }
 
     /**
