@@ -34,7 +34,7 @@
                     <label class="control-label">Imagen 1</label>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-lg-6">
-                    <input type="file" value="Upload Image">
+                    <input type="file" value="Upload Image" name="image_1">
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                     <label class="control-label">Imagen 2</label>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-lg-6">
-                    <input type="file" value="Upload Image">
+                    <input type="file" value="Upload Image" name="image_2">
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
                     <label class="control-label">Imagen 3</label>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-lg-6">
-                    <input type="file" value="Upload Image">
+                    <input type="file" value="Upload Image" name="image_3">
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                 <div class="col-xs-3 col-xs-offset-1 col-sm-2">
                     <label class="control-label">Comentario</label>
                 </div>
-                <textarea rows="4" cols="50">
+                <textarea rows="4" cols="50" name="commentary">
                 </textarea>
             </div>
 
