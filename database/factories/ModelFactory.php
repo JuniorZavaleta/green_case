@@ -22,3 +22,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\Complaint::class, function(Faker\Generator $faker) {
+
+   return [
+        'citizen_id'            => $faker->randomNumber(10),
+        'authority_id'          => $faker->randomNumber(10),
+        'type_contamination_id' => $faker->randomNumber(10),
+        'type_communication_id' => $faker->randomNumber(10),
+        'complaint_state_id'    => $faker->randomNumber(10),
+        'latitude'              => $faker->randomFloat(5),
+        'longitude'             => $faker->randomFloat(5),
+        'commentary'            => $faker->sentence(6)
+   ];
+});
