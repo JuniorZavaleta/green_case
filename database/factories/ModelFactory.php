@@ -54,7 +54,7 @@ $factory->define(App\Models\Authority::class, function ($factory) {
  */
 $factory->define(App\Models\Citizen::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => substr($faker->name, 0, 15),
     ];
 });
 

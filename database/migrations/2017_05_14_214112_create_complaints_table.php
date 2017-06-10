@@ -16,7 +16,7 @@ class CreateComplaintsTable extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('citizen_id')->unsigned();
-            $table->integer('authority_id')->unsigned()->nullable();
+            $table->integer('district_id')->unsigned()->nullable();
             $table->integer('type_contamination_id')->unsigned();
             $table->integer('type_communication_id')->unsigned();
             $table->integer('complaint_state_id')->unsigned();

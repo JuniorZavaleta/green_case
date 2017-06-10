@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
 use App\Models\Complaint;
 use App\Models\Authority;
+use App\Models\District;
 
 class ListComplaintsTest extends TestCase
 {
@@ -34,14 +35,14 @@ class ListComplaintsTest extends TestCase
      */
     public function test_admin_can_see_all_complaints()
     {
-        $authority = factory(Authority::class)->create();
+        $district = factory(District::class)->create();
 
         // Create an admin and authenticate as admin
         $this->be(factory(User::class)->states('admin')->create(), 'admin');
 
         // Create 10 complaints
         factory(Complaint::class, 10)->states('messenger')->create([
-            'authority_id' => $authority->id
+            'district_id' => $district->id
         ]);
 
         // Enter to list of complaints
@@ -67,12 +68,12 @@ class ListComplaintsTest extends TestCase
 
         // Create 8 complaints for Comas
         factory(Complaint::class, 8)->states('messenger', 'completed')->create([
-            'authority_id' => $comas_authority->id
+            'district_id' => $comas_authority->district->id
         ]);
 
         // Create 2 complaints for Miraflores
         factory(Complaint::class, 2)->states('messenger', 'completed')->create([
-            'authority_id' => $miraflores_authority->id
+            'district_id' => $miraflores_authority->id
         ]);
 
         // Enter to list of complaints
