@@ -14,7 +14,7 @@ class AddFkActivityIdToImgActivityTable extends Migration
     public function up()
     {
         Schema::table('img_activity', function (Blueprint $table) {
-            $table->foreign('complaint_id')
+            $table->foreign('activity_id')
                 ->references('id')
                 ->on('activities')
                 ->onDelete('cascade')
@@ -30,7 +30,7 @@ class AddFkActivityIdToImgActivityTable extends Migration
     public function down()
     {
         Schema::table('img_activity', function (Blueprint $table) {
-            $table->dropForeign('img_activity_complaint_id_foreign');
+            $table->dropForeign('img_activity_activity_id_foreign');
         });
     }
 }

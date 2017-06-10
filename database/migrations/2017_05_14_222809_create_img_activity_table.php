@@ -16,7 +16,7 @@ class CreateImgActivityTable extends Migration
         Schema::create('img_activity', function (Blueprint $table) {
             $table->increments('id');
             $table->string('img');
-            $table->integer('complaint_id')->unsigned();
+            $table->integer('activity_id')->unsigned();
             $table->timestamps();
         });
     }
