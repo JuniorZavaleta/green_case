@@ -20,7 +20,12 @@ class Complaint extends Model
 
     protected $table = 'complaints';
 
+    const INCOMPLETED = 1;
     const COMPLETED = 2;
+    const ACCEPTED = 3;
+    const REJECTED = 4;
+    const ON_ATTENTION = 5;
+    const ATTENDED = 6;
 
     /**
      * Relationship with the citizen
@@ -68,13 +73,32 @@ class Complaint extends Model
     }
 
     /**
+     * Relationship with the status (incompleto, registrado, etc)
+     * @return App\Models\ComplaintStatus
+     */
+    public function status()
+    {
+        return $this->belongsTo(ComplaintStatus::class, 'complaint_state_id');
+    }
+
+    /**
      * Filter for only get complaint completed
      * @param  Builder $query before apply the filter
      * @return Builder after apply the filter
      */
     public function scopeCompleted($query)
     {
-        return $query->where('complaint_state_id', static::COMPLETED);
+        return $query->where('complaint_state_id', '!=' ,static::INCOMPLETED);
+    }
+
+    /**
+     * Filter for only get complaint completed
+     * @param  Builder $query before apply the filter
+     * @return Builder after apply the filter
+     */
+    public function scopeIncompleted($query)
+    {
+        return $query->where('complaint_state_id', static::INCOMPLETED);
     }
 
     /**
@@ -83,9 +107,15 @@ class Complaint extends Model
      */
     public function getCreatedAtFormattedAttribute()
     {
-        return $this->created_at->format('d/m/Y H:i:s');
+        if ($this->created_at) {
+            return $this->created_at->format('d/m/Y H:i:s');
+        }
     }
 
+    /**
+     * Return true is the status is completed
+     * @return bool
+     */
     public function getIsCompletedAttribute()
     {
         return $this->complaint_state_id == static::COMPLETED;

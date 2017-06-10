@@ -4,26 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Socialite;
-use App\Models\Citizen;
-use App\Models\Channel;
 use Auth;
 
+use App\Models\Citizen;
+use App\Models\Channel;
+
+/**
+ * FacebookController is a class that ask for permissions on facebook,
+ * then handle the permissions and use it for authenticate citizens. *
+ * For the moment, for close the session of the citizen
+ *
+ * @package App\Http\Controllers
+ * @author Junior Zavaleta
+ * @version 1.0
+ */
 class FacebookController extends Controller
 {
-    public function login()
-    {
-        $user = Auth::guard('web')->user();
-
-        if ($user) {
-            return redirect('/');
-        }
-
-        return view('app.auth.login');
-    }
-
     /**
      * Redirect to facebook asking for permissions
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function redirect()
     {
@@ -32,7 +31,7 @@ class FacebookController extends Controller
 
     /**
      * Handle callback of Facebook
-     * @return Redirect
+     * @return \Illuminate\Http\Response
      */
     public function callback()
     {
@@ -56,5 +55,16 @@ class FacebookController extends Controller
         Auth::login($citizen);
 
         return redirect('/')->with('message', 'OK');
+    }
+
+    /**
+     * Logout the session of citizen
+     * @return \Illuminate\Http\Response
+     */
+    protected function logout()
+    {
+        Auth::guard('web')->logout();
+
+        return redirect('/');
     }
 }

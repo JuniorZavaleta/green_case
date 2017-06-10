@@ -22,6 +22,12 @@
     <link href="{{ asset('css/forms.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
+    <style type="text/css">
+        button.btn-facebook-filled { position: relative; top: 20px; }
+        @media only screen and (max-width: 767px) {
+            button.btn-facebook-filled { top: 0px; }
+        }
+    </style>
 </head>
 
 <body style="overflow: visible;">
@@ -46,12 +52,22 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                     @if ($user)
+                        @if ($is_admin)
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->email }} <span class="caret"></span></a>
+                        @else
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->name }} <span class="caret"></span></a>
+                        @endif
+
                         <ul class="dropdown-menu pulse animated">
-                            <li><a href="#">My Account</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            @if ($is_admin)
+                            <li><a href="{{ route('admin.logout') }}">Logout</a></li>
+                            @else
+                            <li><a href="{{ route('citizen.logout') }}">Logout</a></li>
+                            @endif
                         </ul>
+                    @elseif (is_bool(strpos(Route::current()->uri, 'admin')))
+                        <!-- Always false if is bool, then is not admin -->
+                        <button onClick="javascript:window.location.href='{{ route('facebook.login') }}'" class="btn btn-facebook-filled"><i class="fa fa-facebook"></i> Inicio con Facebook</button>
                     @endif
                     </li>
                 </ul>
@@ -68,9 +84,9 @@
         @if (!$is_admin)
             @yield('content')
         @else
-            @include('layouts.main')
+            @include('layouts.sidebar')
             <!-- content here-->
-            <div class="col-sm-8 col-md-9 content-area">
+            <div class="col-sm-10 content-area">
                 @yield('content')
             </div>
             <!-- end content -->

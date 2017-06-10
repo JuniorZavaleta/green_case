@@ -47,8 +47,8 @@ class ComplaintController extends Controller
    }
 
     /**
-     * List the last 10 complaint completed
-     * @return View
+     * List the last 10 complaints completed
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {

@@ -14,11 +14,23 @@
 Route::get('/', ['as' => 'complaint.index', 'uses' => 'ComplaintController@index']);
 Route::get('/nuevo_caso', ['as' => 'complaint.create', 'uses' => 'ComplaintController@create']);
 Route::post('/nuevo_caso', ['as' => 'complaint.store', 'uses' => 'ComplaintController@store']);
+Route::get('/', 'ComplaintController@index')->name('complaint.index');
 
-Route::get('/login', ['as' => 'login', 'uses' => 'FacebookController@login']);
-Route::get('/facebook/login', ['as' => 'facebook.login', 'uses' => 'FacebookController@redirect']);
-Route::get('/facebook/callback', ['as' => 'facebook.callback', 'uses' => 'FacebookController@callback']);
+Route::get('/login', 'FacebookController@login')->name('login');
+Route::get('/facebook/login', 'FacebookController@redirect')->name('facebook.login');
+Route::get('/facebook/callback', 'FacebookController@callback')->name('facebook.callback');
+Route::get('/logout', 'FacebookController@logout')->name('citizen.logout');
 
 Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
     Route::get('/casos', ['as' => 'admin.complaint.index', 'uses' => 'ComplaintController@index']);
+});
+    Route::get('/login', 'AuthController@showLoginForm')->name('admin.show_login_form');
+    Route::post('/login', 'AuthController@login')->name('admin.login');
+
+    Route::group(['middleware' => 'auth:admin'], function () {
+        Route::get('/casos', 'ComplaintController@index')->name('admin.complaint.index');
+        Route::get('/casos/{complaint}', 'ComplaintController@show')->name('admin.complaint.show');
+
+        Route::get('/logout', 'AuthController@logout')->name('admin.logout');
+    });
 });

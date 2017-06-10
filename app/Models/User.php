@@ -27,4 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function authority()
+    {
+        return $this->hasOne(Authority::class, 'id');
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->attributes['type_user'] == 1;
+    }
 }
