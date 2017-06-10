@@ -23,7 +23,6 @@ Route::get('/logout', 'FacebookController@logout')->name('citizen.logout');
 
 Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
     Route::get('/casos', ['as' => 'admin.complaint.index', 'uses' => 'ComplaintController@index']);
-});
     Route::get('/login', 'AuthController@showLoginForm')->name('admin.show_login_form');
     Route::post('/login', 'AuthController@login')->name('admin.login');
 
