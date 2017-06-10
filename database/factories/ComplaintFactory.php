@@ -13,7 +13,7 @@ $factory->define(App\Models\Complaint::class, function (Faker\Generator $faker, 
         'latitude' => 12.234,
         'longitude' => 21.234,
         'commentary' => 'test comment',
-        'complaint_state_id' => $faker->numberBetween(1, 6),
+        'complaint_status_id' => $faker->numberBetween(1, 6),
         'type_communication_id' => $faker->numberBetween(1, 3),
     ];
 });
@@ -50,7 +50,7 @@ $factory->state(App\Models\Complaint::class, 'facebook', function () {
  */
 $factory->state(App\Models\Complaint::class, 'incompleted', function() {
     return [
-        'complaint_state_id' => App\Models\Complaint::INCOMPLETED,
+        'complaint_status_id' => App\Models\Complaint::INCOMPLETED,
     ];
 });
 
@@ -59,6 +59,6 @@ $factory->state(App\Models\Complaint::class, 'incompleted', function() {
  */
 $factory->state(App\Models\Complaint::class, 'completed', function() {
     return [
-        'complaint_state_id' => App\Models\Complaint::COMPLETED,
+        'complaint_status_id' => App\Models\Complaint::COMPLETED,
     ];
 });
