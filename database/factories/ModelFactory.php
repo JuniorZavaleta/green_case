@@ -59,15 +59,17 @@ $factory->define(App\Models\Citizen::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Complaint::class, function(Faker\Generator $faker) {
+    $citizen = factory(App\Models\Citizen::class)->create();
 
    return [
-        'citizen_id'            => $faker->randomNumber(10),
-        'authority_id'          => $faker->randomNumber(10),
-        'type_contamination_id' => $faker->randomNumber(10),
-        'type_communication_id' => $faker->randomNumber(10),
-        'complaint_state_id'    => $faker->randomNumber(10),
-        'latitude'              => $faker->randomFloat(5),
-        'longitude'             => $faker->randomFloat(5),
-        'commentary'            => $faker->sentence(6)
+        'citizen_id'            => $citizen->id,
+        'authority_id'          => $faker->numberBetween(2, 44),
+        'type_contamination_id' => $faker->numberBetween(1, 6),
+        'latitude'              => 12.234,
+        'longitude'             => 21.234,
+        'commentary'            => 'test comment',
+        'complaint_state_id'    => $faker->numberBetween(1, 6),
+        'type_communication_id' => $faker->numberBetween(1, 3),
    ];
 });
+

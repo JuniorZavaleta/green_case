@@ -21,30 +21,29 @@ class ComplaintController extends Controller
 
     public function store(Request $request)
     {
-        /*$this->validate($request, [
-            'citizen_id'            => 'integer|required',
-            'authority_id'          => 'integer|required',
-            'type_contamination_id' => 'integer|required',
-            'type_communication_id' => 'integer|required',
-            'complaint_state_id'    => 'integer|required',
-            'latitude'              => 'required',
-            'longitude'             => 'required',
-            'commentary'            => 'string',
-        ]);*/
+        $this->validate($request, [
+            'type_contamination' => 'integer|required',
+            'latitude'           => 'required',
+            'longitude'          => 'required',
+            'commentary'         => 'string',
+        ]);
 
-      $complaint = Complaint::create([
-                'citizen_id' => 1,
-                'authority_id' => 2,
-                'type_contamination_id' => 1,
-                'type_communication_id' => 1,
-                'complaint_state_id'    => 1,
-                'latitude' => 33.9,
-                'longitude' => 33.9,
-                'commentary' => 'prueba'
-            ]);
+        $citizen   = Auth::guard('web')->user();
+        $authority = Auth::guard('admin')->user();
+
+        $complaint = Complaint::create([
+            'citizen_id'            => $citizen->id,
+            'authority_id'          => $authority->id,
+            'type_contamination_id' => $request->contamination_type,
+            'type_communication_id' => 3,
+            'complaint_state_id'    => 1,
+            'latitude'              => 33.9,
+            'longitude'             => 33.9,
+            'commentary'            => $request->commentary
+        ]);
 
       return redirect()->route('complaint.index')->with('message', 'reclamo registrado');
-   }
+    }
 
     /**
      * List the last 10 complaints completed
