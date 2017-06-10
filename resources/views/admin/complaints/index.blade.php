@@ -27,7 +27,7 @@
                             <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
                             <a class="btn btn-default btn-xs" href="#">Ver actividades</a>
                             @if ($complaint->is_completed)
-                            <a class="btn btn-info btn-xs" href="#">Evaluar</a>
+                            <a class="btn btn-info btn-xs" href="{{ route('admin.complaint.evaluate', compact('complaint')) }}">Evaluar</a>
                             @endif
                         </td>
                     </tr>
