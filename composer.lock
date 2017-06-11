@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "be148c36d5bd12f5c1813906433e6053",
+    "content-hash": "c6113e353d87de4a7a991e85fb7fd3e4",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -412,6 +412,39 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "juniorzavaleta/mysql-csv",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JuniorZavaleta/MySqlCsvExporter.git",
+                "reference": "83fdf0e4b3033fbf5db1c5cab7687bda62ef5371"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JuniorZavaleta/MySqlCsvExporter/zipball/83fdf0e4b3033fbf5db1c5cab7687bda62ef5371",
+                "reference": "83fdf0e4b3033fbf5db1c5cab7687bda62ef5371",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Csv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Junior Zavaleta",
+                    "email": "juniorclaudiozavaleta@gmail.com"
+                }
+            ],
+            "description": "Export csv with mysql easier",
+            "time": "2017-06-11 21:29:24"
         },
         {
             "name": "laravel/framework",
@@ -3706,7 +3739,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "juniorzavaleta/mysql-csv": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

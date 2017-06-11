@@ -10,7 +10,8 @@ use App\Models\Complaint;
 use App\Models\ComplaintStatus;
 use App\Models\District;
 use App\Models\ContaminationType;
-use App\Services\CsvGenerator;
+
+use Csv\CsvGenerator;
 
 /**
  * ComplaintController is a class that manage the complaints applying filters
