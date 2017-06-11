@@ -419,12 +419,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JuniorZavaleta/MySqlCsvExporter.git",
-                "reference": "83fdf0e4b3033fbf5db1c5cab7687bda62ef5371"
+                "reference": "88e67a035e2eaf3a617b0595309fe680bb62a6cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JuniorZavaleta/MySqlCsvExporter/zipball/83fdf0e4b3033fbf5db1c5cab7687bda62ef5371",
-                "reference": "83fdf0e4b3033fbf5db1c5cab7687bda62ef5371",
+                "url": "https://api.github.com/repos/JuniorZavaleta/MySqlCsvExporter/zipball/88e67a035e2eaf3a617b0595309fe680bb62a6cb",
+                "reference": "88e67a035e2eaf3a617b0595309fe680bb62a6cb",
                 "shasum": ""
             },
             "require": {
@@ -437,6 +437,9 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "Junior Zavaleta",
@@ -444,7 +447,7 @@
                 }
             ],
             "description": "Export csv with mysql easier",
-            "time": "2017-06-11 21:29:24"
+            "time": "2017-06-11 21:42:18"
         },
         {
             "name": "laravel/framework",
