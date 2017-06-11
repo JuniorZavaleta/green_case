@@ -10,7 +10,7 @@ use DB;
  * @author Junior Zavaleta
  * @version 1.0
  */
-abstract class CsvGenerator
+class CsvGenerator
 {
     /**
      * Query for select data
@@ -35,6 +35,82 @@ abstract class CsvGenerator
      * @var bool
      */
     protected $with_where;
+
+    /**
+     * Columns of the tables to export
+     * @var string
+     */
+    protected $columns;
+
+    /**
+     * Main table to export
+     * @var string
+     */
+    protected $table;
+
+    /**
+     * Join relationships with the main table or other table added on join
+     * @var string
+     */
+    protected $joins;
+
+    public function __construct(string $table, array $titles = [], array $columns = [])
+    {
+        $this->table = $table;
+        $this->titles = is_array($titles) ? $this->setTitles($titles) : [];
+        $this->columns = is_array($columns) ? $this->setTitles($columns) : [];
+    }
+
+    /**
+     * Set the titles for the csv
+     * @param mixed $titles
+     */
+    public function setTitles($titles)
+    {
+        $titles = is_array($titles) ? $titles : func_get_args();
+
+        $this->titles = '"'.implode('", "',$titles).'"';
+    }
+
+    /**
+     * Set the columns to export
+     * @param mixed $columns
+     */
+    public function setColumns($columns)
+    {
+        $columns = is_array($columns) ? $columns : func_get_args();
+
+        $this->columns = implode(', ', $columns);
+    }
+
+    /**
+     * Set the filename of the csv for generated
+     * @param string $filename
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+    }
+
+    /**
+     * Add a join to the query
+     * @param  string $table     table to join
+     * @param  string $key_one   first key
+     * @param  mixed  $operator  operator or second key
+     * @param  string $key_two   second key if operator exists
+     * @return CsvGenerator
+     */
+    public function join($table, $key_one, $operator, $key_two = null)
+    {
+        if (is_null($key_two)) {
+            $key_two = $operator;
+            $operator = '=';
+        }
+
+        $this->joins .= " JOIN {$table} ON {$key_one} {$operator} {$key_two} ";
+
+        return $this;
+    }
 
     /**
      * Add a condition to the initial query
@@ -92,17 +168,32 @@ abstract class CsvGenerator
      */
     public function execute()
     {
-        $this->query .= "
+        $query = "SELECT {$this->columns} FROM $this->table ";
+
+        if ($this->joins) {
+            $query .= $this->joins;
+        }
+
+        $query .= $this->query;
+
+        if (is_null($this->filename)) {
+            $this->filename = '/tmp/file.csv';
+        }
+
+        $query .= "
             INTO OUTFILE '{$this->filename}'
             CHARACTER SET utf8
             FIELDS TERMINATED BY ','
             ENCLOSED BY '\"'
             LINES TERMINATED BY '\n'
         ";
-        DB::statement($this->query);
 
-        $file = file_get_contents($this->filename);
-        file_put_contents($this->filename, $this->titles . "\n" . $file);
+        DB::statement($query);
+
+        if ($this->titles) {
+            $file = file_get_contents($this->filename);
+            file_put_contents($this->filename, $this->titles . "\n" . $file);
+        }
 
         return $this->filename;
     }
