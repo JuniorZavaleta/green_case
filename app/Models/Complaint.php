@@ -68,6 +68,15 @@ class Complaint extends Model
     }
 
     /**
+     * Relationship with
+     * @return App\Models\Activity
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    /**
      * Filter for only get complaint completed
      * @param  Builder $query before apply the filter
      * @return Builder after apply the filter
