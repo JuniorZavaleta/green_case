@@ -11,33 +11,33 @@ class ComplaintStatesSeeder extends Seeder
      */
     public function run()
     {
-        $complaint_states = [
+        $complaint_status = [
             [
                 'id'          => 1,
-                'description' => 'incompleto'
+                'name' => 'incompleto'
             ],
             [
                 'id'          => 2,
-                'description' => 'registrado'
+                'name' => 'registrado'
             ],
             [
                 'id'          => 3,
-                'description' => 'aceptado'
+                'name' => 'aceptado'
             ],
             [
                 'id'          => 4,
-                'description' => 'rechazado'
+                'name' => 'rechazado'
             ],
             [
                 'id'          => 5,
-                'description' => 'en atención'
+                'name' => 'en atención'
             ],
             [
                 'id'          => 6,
-                'description' => 'atendido'
+                'name' => 'atendido'
             ],
         ];
 
-        DB::table('complaint_states')->insert($complaint_states);
+        DB::table('complaint_status')->insert($complaint_status);
     }
 }

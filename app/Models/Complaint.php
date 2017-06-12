@@ -12,7 +12,6 @@ class Complaint extends Model
     const REJECTED = 4;
     const ON_ATTENTION = 5;
     const ATTENDED = 6;
-
     /**
      * Relationship with the citizen
      * @return App\Models\Citizen
@@ -64,7 +63,7 @@ class Complaint extends Model
      */
     public function status()
     {
-        return $this->belongsTo(ComplaintStatus::class, 'complaint_state_id');
+        return $this->belongsTo(ComplaintStatus::class, 'complaint_status_id');
     }
 
     /**
@@ -83,7 +82,7 @@ class Complaint extends Model
      */
     public function scopeCompleted($query)
     {
-        return $query->where('complaint_state_id', '!=' ,static::INCOMPLETED);
+        return $query->where('complaint_status_id', '!=' ,static::INCOMPLETED);
     }
 
     /**
@@ -93,7 +92,7 @@ class Complaint extends Model
      */
     public function scopeIncompleted($query)
     {
-        return $query->where('complaint_state_id', static::INCOMPLETED);
+        return $query->where('complaint_status_id', static::INCOMPLETED);
     }
 
     /**
@@ -113,7 +112,8 @@ class Complaint extends Model
      */
     public function getIsCompletedAttribute()
     {
-        return $this->complaint_state_id == static::COMPLETED;
+        //de momento
+        return $this->complaint_state_id != static::INCOMPLETED;
     }
 
     /**
