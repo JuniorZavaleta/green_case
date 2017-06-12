@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use App\Models\ComplaintStatus;
 use Auth;
+use Mail;
 
 /**
  * ComplaintController is a class that manage the complaints applying filters
@@ -59,16 +60,47 @@ class ComplaintController extends Controller
     {
         $complaint->complaint_status_id = Complaint::ACCEPTED;
 
-        $complaint->save();
+        $isSave = $complaint->save();
+
+        $data = [
+            'messages'   => 'Caso Aceptado',
+            'commentary' => 'Su caso a sido aceptado',
+        ];
+
+        if($isSave){
+            Mail::send('emails.messages', $data, function($message){
+                //remitente
+                $message->from('admin@compushop.com', 'Puto');
+                //receptor
+                $message->to('chavezvasquezjuan@gmail.com')->subject('Notificación');
+            });
+        }
 
         return redirect()->route('admin.complaint.index')->with('message', 'complaint accepted sucessfully');
     }
 
-    public function rejected(Complaint $complaint)
+    public function rejected(Complaint $complaint, Request $request)
     {
-        $complaint->complaint_status_id = Complaint::REJECTED;
+        $commentary = $request->input('commentary');
 
-        $complaint->save();
+        $complaint->complaint_status_id = Complaint::REJECTED;
+        $complaint->commentary = $commentary;
+
+        $isSave = $complaint->save();
+
+        $data = [
+            'messages'   => 'Caso Rechazado',
+            'commentary' => $commentary,
+        ];
+
+        if($isSave){
+            Mail::send('emails.messages', $data, function($message){
+                //remitente
+                $message->from('admin@compushop.com', 'Puto');
+                //receptor
+                $message->to('chavezvasquezjuan@gmail.com')->subject('Notificación');
+            });
+        }
 
         return redirect()->route('admin.complaint.index')->with('message', 'complaint rejected sucessfully');
     }

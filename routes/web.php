@@ -27,7 +27,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::get('/casos/{complaint}', 'ComplaintController@show')->name('admin.complaint.show');
         Route::get('/casos/evaluar/{complaint}', 'ComplaintController@getEvaluate')->name('admin.complaint.evaluate');
         Route::get('/casos/accepted/{complaint}', 'ComplaintController@accepted')->name('admin.complaint.accepted');
-        Route::get('/casos/rejected/{complaint}', 'ComplaintController@rejected')->name('admin.complaint.rejected');
+        Route::post('/casos/rejected/{complaint}', 'ComplaintController@rejected')->name('admin.complaint.rejected');
 
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });
