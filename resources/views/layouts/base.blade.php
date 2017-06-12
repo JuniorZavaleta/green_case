@@ -105,5 +105,6 @@
 <script src="{{ asset('js/jquery.shuffle.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 @stack('extra-js')
+@stack('modal')
 </body>
 </html>
