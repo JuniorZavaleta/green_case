@@ -1,13 +1,5 @@
 @extends('layouts.base')
 
-@push('extra-css')
-    <link href="{{ asset('css/sweetalert.css') }}" rel="stylesheet">
-@endpush
-
-@push('extra-css')
-    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
-@endpush
-
 @section('content')
 <div class="row">
     <div class="col-xs-12">
@@ -43,7 +35,7 @@
                 </div>
                 <div class="row">
                     <a href="{{ route('admin.complaint.accepted', compact('complaint')) }}" class="btn btn-square btn-primary" type="button">Aceptar Caso</a>
-                    <a href="{{ route('admin.complaint.rejected', compact('complaint')) }}" class="btn btn-square btn-danger" type="button">Rechazar Caso</a>
+                    <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-square btn-danger">Rechazar Caso</a>
                 </div>
                 <hr></hr>
             </div>
@@ -70,3 +62,40 @@
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}&callback=initMap"></script>
 @endsection
+
+@push('modal')
+<!-- Modal-->
+<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="myModalLabel" class="modal-title">Modal title</h4>
+            </div>
+            <form method="POST" action="{{ route('admin.complaint.rejected', compact('complaint')) }}">
+                <div class="modal-body">
+                    {{ csrf_field() }}
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Comentarios</label>
+                            <div class="col-sm-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <textarea rows="10" name="commentary" class="form-control note-editor"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-square btn-danger">Confirmar Rechazo</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endpush
