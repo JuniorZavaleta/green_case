@@ -108,6 +108,13 @@ class ComplaintController extends Controller
      */
     public function show(Complaint $complaint)
     {
+        if (session('district_id')) {
+            if ($complaint->district_id != session('district_id')) {
+                return redirect()->route('admin.complaint.index')
+                    ->with('access_denied', 'Acceso Inválido');
+            }
+        }
+
         return view('admin.complaints.show', compact('complaint'));
     }
 
