@@ -115,4 +115,15 @@ class Complaint extends Model
     {
         return $this->complaint_state_id == static::COMPLETED;
     }
+
+    /**
+     * If the complaint is or was approved
+     * @return bool
+     */
+    public function getIsApprovedAttribute()
+    {
+        return $this->complaint_state_id == static::ACCEPTED ||
+            $this->complaint_state_id == static::ON_ATTENTION ||
+            $this->complaint_state_id == static::ATTENDED;
+    }
 }
