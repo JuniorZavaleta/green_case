@@ -26,7 +26,7 @@ class Telegram implements MessengerInterface
         $this->base_url = 'https://api.telegram.org/bot'.env('TELEGRAM_BOT_TOKEN');
     }
 
-    public function sendMessage($receiver, $subject, $view, $data)
+    public function sendMessage($receiver, $subject, $view, $data = [])
     {
         $message = view($view)->render();
         $url = "{$this->base_url}/sendMessage?text={$message}&chat_id={$receiver}";
