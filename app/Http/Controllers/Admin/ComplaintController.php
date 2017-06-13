@@ -178,7 +178,7 @@ class ComplaintController extends Controller
             $complaint->complaint_status_id = Complaint::ACCEPTED;
             $complaint->save();
 
-            $subject = 'Caso de contaminacion aprobado';
+            $subject = 'Caso de contaminación aprobado';
             $view = 'complaint_accepted';
             $data = [
                 'contamination_type' => $complaint->contamination_type->description,
@@ -197,27 +197,26 @@ class ComplaintController extends Controller
 
     public function rejected(Complaint $complaint, Request $request)
     {
-        $commentary = $request->input('commentary');
+        if ($complaints->complaint_status_id == Complaint::COMPLETED) {
+            $complaint->complaint_status_id = Complaint::REJECTED;
+            $complaint->save();
 
-        $complaint->complaint_status_id = Complaint::REJECTED;
-        $complaint->commentary = $commentary;
+            $commentary = $request->input('commentary');
+            $subject = 'Caso de contaminación rechazado';
+            $view = 'complaint_rejected';
 
-        $isSave = $complaint->save();
+            $data = [
+                'contamination_type' => $complaint->contamination_type->description,
+                'district' => $complaint->district->name,
+                'reason' => $commentary,
+            ];
 
-        $data = [
-            'messages'   => 'Caso Rechazado',
-            'commentary' => $commentary,
-        ];
+            $complaint->citizen->sendNotification($subject, $view, $data);
 
-        if($isSave){
-            Mail::send('emails.messages', $data, function($message){
-                //remitente
-                $message->from('admin@compushop.com', 'Puto');
-                //receptor
-                $message->to('chavezvasquezjuan@gmail.com')->subject('Notificación');
-            });
+            return redirect()->route('admin.complaint.index')->with('message', 'complaint rejected sucessfully');
         }
 
-        return redirect()->route('admin.complaint.index')->with('message', 'complaint rejected sucessfully');
+        return redirect()->route('admin.complaint.index')
+            ->with('access_denied', 'Estado de caso inválido.');
     }
 }
