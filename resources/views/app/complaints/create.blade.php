@@ -71,21 +71,35 @@
                 </div>
             </div>
         </div>
-    </div>
+        <input type="hidden" name="latitude" id="latitude" value="{{ $default_latitude }}">
+        <input type="hidden" name="longitude" id="longitude" value="{{ $default_longitude }}">
+    </form>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}"></script>
 <script>
-  function initMap() {
-    var uluru = {lat: -12.0560257, lng: -77.0844226};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: uluru
+var map;
+var marker;
+var uluru = {lat: {{ $default_latitude }}, lng: {{ $default_longitude }}};
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: uluru
     });
-    var marker = new google.maps.Marker({
+
+    marker = new google.maps.Marker({
       position: uluru,
-      map: map
+      map: map,
+      draggable: true,
     });
-  }
+}
+
+initMap();
+
+google.maps.event.addListener(marker, "dragend", function (event) {
+    document.getElementById("latitude").value = this.getPosition().lat();
+    document.getElementById("longitude").value = this.getPosition().lng();
+});
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}&callback=initMap"></script>
 @endsection

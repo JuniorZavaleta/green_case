@@ -25,9 +25,13 @@ class ComplaintController extends Controller
 
     public function create()
     {
+        $default_latitude = -12.0560257;
+        $default_longitude = -77.0844226;
         $contamination_types = ContaminationType::all();
 
-        return view('app.complaints.create', compact('contamination_types'));
+        return view('app.complaints.create', compact(
+            'contamination_types', 'default_latitude', 'default_longitude'
+        ));
     }
 
     public function store(ImageUpload $image_uploader)
@@ -39,8 +43,8 @@ class ComplaintController extends Controller
             'type_contamination_id' => request('contamination_type'),
             'type_communication_id' => Channel::FACEBOOK,
             'complaint_status_id'   => Complaint::COMPLETED,
-            'latitude'              => 33.9,
-            'longitude'             => 33.9,
+            'latitude'              => request('latitude'),
+            'longitude'             => request('longitude'),
             'district_id'           => 1,
             'commentary'            => request('commentary')
         ]);
