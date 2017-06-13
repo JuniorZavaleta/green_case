@@ -63,7 +63,9 @@ class ComplaintController extends Controller
     {
         $query = Complaint::with('district', 'contamination_type', 'status');
 
-        if (!$user->is_admin) {
+        if ($user->is_admin) {
+            $query->withTrashed();
+        } else {
             $query->where('district_id', session('district_id'))->completed();
         }
 
