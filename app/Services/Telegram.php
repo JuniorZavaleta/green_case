@@ -37,6 +37,6 @@ class Telegram implements MessengerInterface
             return true;
         }
 
-        throw new \TelegramApiException;
+        throw new TelegramApiException;
     }
 }

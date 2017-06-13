@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Auth;
 use Carbon\Carbon;
-use Mail;
 
 use App\Models\Complaint;
 use App\Models\ComplaintStatus;
@@ -187,13 +186,19 @@ class ComplaintController extends Controller
             ->with('access_denied', 'Estado de caso inválido.');
     }
 
-    public function rejected(Complaint $complaint, Request $request)
+    public function rejected(Complaint $complaint)
     {
-        if ($complaints->complaint_status_id == Complaint::COMPLETED) {
+        $this->validate(request(), [
+            'commentary' => 'min:50',
+        ], [
+            'commentary.min' => 'El comentario debe tener al menos :min carácteres',
+        ]);
+
+        if ($complaint->complaint_status_id == Complaint::COMPLETED) {
             $complaint->complaint_status_id = Complaint::REJECTED;
             $complaint->save();
 
-            $commentary = $request->input('commentary');
+            $commentary = request('commentary');
             $subject = 'Caso de contaminación rechazado';
             $view = 'complaint_rejected';
 

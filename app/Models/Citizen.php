@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Services\Telegram;
+use App\Services\Messenger;
 use App\Services\Mail;
 
 class Citizen extends Authenticatable
@@ -107,7 +108,7 @@ class Citizen extends Authenticatable
 
         switch ($channel->id) {
             case Channel::TELEGRAM: $sender = new Telegram; break;
-            case Channel::MESSENGER: break;
+            case Channel::MESSENGER: $sender = new Messenger; break;
             case Channel::FACEBOOK: $sender = new Mail; break;
         }
 

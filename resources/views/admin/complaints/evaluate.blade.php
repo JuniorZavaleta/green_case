@@ -1,6 +1,13 @@
 @extends('layouts.base')
 
 @section('content')
+@if ($errors->first())
+<div class="row">
+    <div class="alert alert-danger">
+        {{ $errors->first() }}
+    </div>
+</div>
+@endif
 <div class="row">
     <div class="col-xs-12">
         <div class="">
@@ -31,11 +38,13 @@
                     <h3>Comentario</h3>
                 </div>
                 <div class="row">
-                    {{ $complaint->commentary }}
+                    <p>{{ $complaint->commentary }}</p>
                 </div>
                 <div class="row">
-                    <a href="{{ route('admin.complaint.accepted', compact('complaint')) }}" class="btn btn-square btn-primary" type="button">Aceptar Caso</a>
-                    <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-square btn-danger">Rechazar Caso</a>
+                    <div class="form-group">
+                        <a href="{{ route('admin.complaint.accepted', compact('complaint')) }}" class="btn btn-square btn-primary" type="button">Aceptar Caso</a>
+                        <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-square btn-danger">Rechazar Caso</a>
+                    </div>
                 </div>
                 <hr></hr>
             </div>

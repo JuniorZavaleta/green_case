@@ -1,0 +1,1 @@
+Caso de contaminacion aprobado :D sobre {{ $contamination_type }} ubicado en el distrito de {{ $district }}.
