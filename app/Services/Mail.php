@@ -3,16 +3,35 @@
 namespace App\Services;
 
 use Mail as LaravelMailer;
+use Illuminate\Mail\Mailable;
+
+class MyMail extends Mailable
+{
+    public $view;
+
+    public $content;
+
+    public function __construct($view, $subject, $content = [])
+    {
+        $this->view = 'notifications.email.'.$view;
+        $this->content = $content;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->markdown($this->view, $this->content);
+    }
+}
 
 class Mail implements MessengerInterface
 {
     public function sendMessage($receiver, $subject, $view, $data = [])
     {
-        $view = 'notifications.email.'.$view;
-        LaravelMailer::send($view, $data,
-            function ($mail) use ($receiver, $subject) {
-                $mail->to($receiver)->subject($subject);
-            }
-        );
+        LaravelMailer::to($receiver)->send(new MyMail($view, $subject, $data));
     }
 }
