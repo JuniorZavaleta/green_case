@@ -15,6 +15,7 @@ class MyMail extends Mailable
     {
         $this->view = 'notifications.email.'.$view;
         $this->content = $content;
+        $this->subject = $subject;
     }
 
     /**
