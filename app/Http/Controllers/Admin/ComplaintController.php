@@ -29,6 +29,7 @@ class ComplaintController extends Controller
     public function __construct()
     {
         $this->per_page = 20;
+        $this->middleware('jurisdiction')->only(['show', 'getEvaluate', 'accepted', 'rejected']);
     }
 
     /**
@@ -109,13 +110,6 @@ class ComplaintController extends Controller
      */
     public function show(Complaint $complaint)
     {
-        if (session('district_id')) {
-            if ($complaint->district_id != session('district_id')) {
-                return redirect()->route('admin.complaint.index')
-                    ->with('access_denied', 'Acceso Inválido');
-            }
-        }
-
         return view('admin.complaints.show', compact('complaint'));
     }
 
@@ -165,11 +159,9 @@ class ComplaintController extends Controller
         return response()->download($filename)->deleteFileAfterSend(true);
     }
 
-    public function getEvaluate($id)
+    public function getEvaluate(Complaint $complaint)
     {
-        $complaint = Complaint::find($id);
-
-        return view('admin.complaints.evaluate', compact('complaint', $complaint));
+        return view('admin.complaints.evaluate', compact('complaint'));
     }
 
     public function accepted(Complaint $complaint)

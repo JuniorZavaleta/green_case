@@ -112,7 +112,7 @@ class Complaint extends Model
      */
     public function getIsCompletedAttribute()
     {
-        return $this->complaint_state_id == static::COMPLETED;
+        return $this->complaint_status_id == static::COMPLETED;
     }
 
     /**
@@ -121,8 +121,8 @@ class Complaint extends Model
      */
     public function getIsApprovedAttribute()
     {
-        return $this->complaint_state_id == static::ACCEPTED ||
-            $this->complaint_state_id == static::ON_ATTENTION ||
-            $this->complaint_state_id == static::ATTENDED;
+        return $this->complaint_status_id == static::ACCEPTED ||
+            $this->complaint_status_id == static::ON_ATTENTION ||
+            $this->complaint_status_id == static::ATTENDED;
     }
 }
