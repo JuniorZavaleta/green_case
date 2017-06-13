@@ -5,6 +5,7 @@
     <h2>Registrar caso de contaminación</h2>
 </div>
 <div class="row">
+    <div class="col-xs-12">
     <form class="form-horizontal" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="form-container">
@@ -71,5 +72,20 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
+<script>
+  function initMap() {
+    var uluru = {lat: -12.0560257, lng: -77.0844226};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}&callback=initMap"></script>
 @endsection

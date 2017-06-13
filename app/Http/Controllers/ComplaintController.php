@@ -27,7 +27,7 @@ class ComplaintController extends Controller
     {
         $contamination_types = ContaminationType::all();
 
-        return view('citizen.complaints.create', compact('contamination_types'));
+        return view('app.complaints.create', compact('contamination_types'));
     }
 
     public function store(ImageUpload $image_uploader)
