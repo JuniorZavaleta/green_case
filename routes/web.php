@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', ['as' => 'complaint.index', 'uses' => 'ComplaintController@index']);
-Route::get('/nuevo_caso', ['as' => 'complaint.create', 'uses' => 'ComplaintController@create']);
-Route::post('/nuevo_caso', ['as' => 'complaint.store', 'uses' => 'ComplaintController@store']);
 Route::get('/', 'ComplaintController@index')->name('complaint.index');
+
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
+    Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
+});
 
 Route::get('/login', 'FacebookController@login')->name('login');
 Route::get('/facebook/login', 'FacebookController@redirect')->name('facebook.login');

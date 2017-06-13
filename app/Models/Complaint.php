@@ -6,19 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Complaint extends Model
 {
-
     protected $fillable = [
-                            'citizen_id',
-                            'authority_id',
-                            'type_contamination_id',
-                            'type_communication_id',
-                            'complaint_state_id',
-                            'latitude',
-                            'longitude',
-                            'commentary'
-                          ];
-
-    protected $table = 'complaints';
+        'citizen_id',
+        'district_id',
+        'type_contamination_id',
+        'type_communication_id',
+        'complaint_status_id',
+        'latitude',
+        'longitude',
+        'commentary'
+    ];
 
     const INCOMPLETED = 1;
     const COMPLETED = 2;
@@ -26,6 +23,7 @@ class Complaint extends Model
     const REJECTED = 4;
     const ON_ATTENTION = 5;
     const ATTENDED = 6;
+
     /**
      * Relationship with the citizen
      * @return App\Models\Citizen

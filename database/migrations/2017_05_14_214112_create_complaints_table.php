@@ -24,6 +24,7 @@ class CreateComplaintsTable extends Migration
             $table->double('longitude')->nullable();
             $table->text('commentary')->nullable();
             $table->date('date_status_updated')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

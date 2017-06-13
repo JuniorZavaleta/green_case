@@ -12,8 +12,8 @@ use App\Models\ComplaintImage;
 
 use Image;
 
-class ImageUpload {
-
+class ImageUpload
+{
     public function saveImageComplaint($img_complaint, $complaint_id)
     {
         $base_filename = $complaint_id.'-'.date('d-m-Y');
@@ -24,7 +24,6 @@ class ImageUpload {
             'img'          => $filename_image,
             'complaint_id' => $complaint_id
         ]);
-
     }
 
     public function save($file_image, $image_name)
