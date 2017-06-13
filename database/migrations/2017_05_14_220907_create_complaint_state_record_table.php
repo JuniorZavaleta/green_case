@@ -16,7 +16,7 @@ class CreateComplaintStateRecordTable extends Migration
         Schema::create('complaint_state_record', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('complaint_id')->unsigned();
-            $table->integer('complaint_state_id')->unsigned();
+            $table->integer('complaint_status_id')->unsigned();
             $table->timestamps();
         });
     }

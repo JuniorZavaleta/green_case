@@ -14,9 +14,9 @@ class AddFkComplaintStateIdToComplaintsTable extends Migration
     public function up()
     {
         Schema::table('complaints', function (Blueprint $table) {
-            $table->foreign('complaint_state_id')
+            $table->foreign('complaint_status_id')
                 ->references('id')
-                ->on('complaint_states')
+                ->on('complaint_status')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -30,7 +30,7 @@ class AddFkComplaintStateIdToComplaintsTable extends Migration
     public function down()
     {
         Schema::table('complaints', function (Blueprint $table) {
-            $table->dropForeign('complaints_complaint_state_id_foreign');
+            $table->dropForeign('complaints_complaint_status_id_foreign');
         });
     }
 }
