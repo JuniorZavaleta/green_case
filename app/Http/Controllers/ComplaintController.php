@@ -3,11 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\Input;
 use App\Models\Complaint;
 use App\Models\ContaminationType;
 
+use App\Services\ImageUpload;
+
 class ComplaintController extends Controller
 {
+
+    public function __construct(ImageUpload $image_upload)
+    {
+      $this->image_upload = $image_upload;
+    }
+
     public function create()
     {
         $contamination_types = ContaminationType::all();
@@ -21,28 +31,23 @@ class ComplaintController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'type_contamination' => 'integer|required',
-            'latitude'           => 'required',
-            'longitude'          => 'required',
-            'commentary'         => 'string',
-        ]);
-
         $citizen   = Auth::guard('web')->user();
         $authority = Auth::guard('admin')->user();
 
         $complaint = Complaint::create([
             'citizen_id'            => $citizen->id,
-            'authority_id'          => $authority->id,
             'type_contamination_id' => $request->contamination_type,
             'type_communication_id' => 3,
-            'complaint_state_id'    => 1,
+            'complaint_state_id'    => 2,
             'latitude'              => 33.9,
             'longitude'             => 33.9,
             'commentary'            => $request->commentary
         ]);
+        $file = $request->file('image_1');
 
-      return redirect()->route('complaint.index')->with('message', 'reclamo registrado');
+        $this->image_upload->saveImageComplaint($file, $complaint->id);
+
+        return redirect()->route('complaint.index')->with('message', 'reclamo registrado');
     }
 
     /**

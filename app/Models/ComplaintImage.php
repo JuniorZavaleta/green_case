@@ -11,6 +11,8 @@ class ComplaintImage extends Model
      *
      * @var string
      */
+    protected $fillable = ['complaint_id', 'img'];
+
     protected $table = 'img_complaint';
 
     /**

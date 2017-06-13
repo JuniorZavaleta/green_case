@@ -12,7 +12,7 @@
         <p>Tipo de Contaminación: {{ $complaint->contamination_type->description }}</p>
         <p>Fecha: {{ $complaint->created_at_formatted }}</p>
         <p>Enviado desde: {{ $complaint->channel->description }}</p>
-        <img src="{{ $complaint->images[0]->img_path }}"/>
+        <img src=" {{ asset('img/complaints/'.$complaint->images[0]->img_path) }} "/>
     </div>
     @endforeach
 </div>

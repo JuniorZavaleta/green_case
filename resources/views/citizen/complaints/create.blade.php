@@ -5,7 +5,7 @@
     <h2>Registrar caso de contaminación</h2>
 </div>
 <div class="row">
-    <form class="form-horizontal" method="POST">
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="form-container">
             <div class="form-group">
@@ -34,7 +34,7 @@
                     <label class="control-label">Imagen 1</label>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-lg-6">
-                    <input type="file" value="Upload Image" name="image_1">
+                    <input type="file" name="image_1">
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                     <label class="control-label">Imagen 2</label>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-lg-6">
-                    <input type="file" value="Upload Image" name="image_2">
+                    <input type="file" name="image_2">
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
                     <label class="control-label">Imagen 3</label>
                 </div>
                 <div class="col-xs-6 col-sm-8 col-lg-6">
-                    <input type="file" value="Upload Image" name="image_3">
+                    <input type="file" name="image_3">
                 </div>
             </div>
 
