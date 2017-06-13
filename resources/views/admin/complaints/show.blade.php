@@ -5,7 +5,7 @@
     <div class="col-xs-12">
         <div class="">
             <div class="panel-heading">
-                <div class="panel-title"><h2>Caso de contamination #{{ $complaint->id }}</h2></div>
+                <div class="panel-title"><h2>Caso de contaminación #{{ $complaint->id }}</h2></div>
             </div>
             <div class="panel-body">
                 <div class="panel panel-info">
