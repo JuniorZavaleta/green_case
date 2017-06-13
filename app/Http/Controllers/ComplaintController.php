@@ -15,7 +15,7 @@ class ComplaintController extends Controller
 
     public function __construct(ImageUpload $image_upload)
     {
-      $this->image_upload = $image_upload;
+       $this->image_upload = $image_upload;
     }
 
     public function create()
@@ -26,13 +26,12 @@ class ComplaintController extends Controller
             'contamination_types' => $contamination_types,
         ];
 
-        return view('citizen.complaints.create', $data);
+        return view('citizen.complaints.create', compact('contamination_types'));
     }
 
     public function store(Request $request)
     {
         $citizen   = Auth::guard('web')->user();
-        $authority = Auth::guard('admin')->user();
 
         $complaint = Complaint::create([
             'citizen_id'            => $citizen->id,
