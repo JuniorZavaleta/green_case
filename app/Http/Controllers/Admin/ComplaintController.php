@@ -43,7 +43,7 @@ class ComplaintController extends Controller
     public function index()
     {
         $user = Auth::guard('admin')->user();
-        $status = ComplaintStatus::pluck('description', 'id');
+        $status = ComplaintStatus::pluck('name', 'id');
         $districts = $user->is_admin ? District::orderBy('name')->pluck('name', 'id') : [];
         $contamination_types = ContaminationType::orderBy('description')->pluck('description', 'id');
 
@@ -174,25 +174,25 @@ class ComplaintController extends Controller
 
     public function accepted(Complaint $complaint)
     {
-        $complaint->complaint_status_id = Complaint::ACCEPTED;
+        if ($complaint->complaint_status_id == Complaint::COMPLETED) {
+            $complaint->complaint_status_id = Complaint::ACCEPTED;
+            $complaint->save();
 
-        $isSave = $complaint->save();
+            $subject = 'Caso de contaminacion aprobado';
+            $view = 'complaint_accepted';
+            $data = [
+                'contamination_type' => $complaint->contamination_type->description,
+                'district' => $complaint->district->name,
+            ];
 
-        $data = [
-            'messages'   => 'Caso Aceptado',
-            'commentary' => 'Su caso a sido aceptado',
-        ];
+            $complaint->citizen->sendNotification($subject, $view, $data);
 
-        if($isSave){
-            Mail::send('emails.messages', $data, function($message){
-                //remitente
-                $message->from('admin@compushop.com', 'Puto');
-                //receptor
-                $message->to('chavezvasquezjuan@gmail.com')->subject('Notificación');
-            });
+            return redirect()->route('admin.complaint.index')
+                ->with('message', 'Caso aceptado exitosamente.');
         }
 
-        return redirect()->route('admin.complaint.index')->with('message', 'complaint accepted sucessfully');
+        return redirect()->route('admin.complaint.index')
+            ->with('access_denied', 'Estado de caso inválido.');
     }
 
     public function rejected(Complaint $complaint, Request $request)

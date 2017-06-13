@@ -112,8 +112,7 @@ class Complaint extends Model
      */
     public function getIsCompletedAttribute()
     {
-        //de momento
-        return $this->complaint_state_id != static::INCOMPLETED;
+        return $this->complaint_state_id == static::COMPLETED;
     }
 
     /**

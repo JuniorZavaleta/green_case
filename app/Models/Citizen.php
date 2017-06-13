@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Services\Telegram;
+use App\Services\Mail;
+
 class Citizen extends Authenticatable
 {
     /**
@@ -32,7 +35,7 @@ class Citizen extends Authenticatable
             'citizen_communication',
             'citizen_id',
             'communication_type_id'
-        );
+        )->withPivot('account_id');
     }
 
     /**
@@ -79,7 +82,7 @@ class Citizen extends Authenticatable
     {
         $citizen = Citizen::create(['name' => $fb_user->user['first_name']]);
 
-        $citizen->assignChannel($fb_user->id, Channel::FACEBOOK);
+        $citizen->assignChannel($fb_user->email, Channel::FACEBOOK);
 
         return $citizen;
     }
@@ -95,5 +98,19 @@ class Citizen extends Authenticatable
         $this->channels()->attach(Channel::find($channel), [
             'account_id' => $account_id
         ]);
+    }
+
+    public function sendNotification($subject, $view, $data = [])
+    {
+        $channel = $this->channels->first();
+        $receiver = $channel->pivot->account_id;
+
+        switch ($channel->id) {
+            case Channel::TELEGRAM: $sender = new Telegram; break;
+            case Channel::MESSENGER: break;
+            case Channel::FACEBOOK: $sender = new Mail; break;
+        }
+
+        $sender->sendMessage($receiver, $subject, $view, $data);
     }
 }

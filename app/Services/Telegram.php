@@ -28,7 +28,8 @@ class Telegram implements MessengerInterface
 
     public function sendMessage($receiver, $subject, $view, $data = [])
     {
-        $message = view($view)->render();
+        $view = 'notifications.telegram.'.$view;
+        $message = view($view, $data)->render();
         $url = "{$this->base_url}/sendMessage?text={$message}&chat_id={$receiver}";
         $result = json_decode(file_get_contents($url), true);
 

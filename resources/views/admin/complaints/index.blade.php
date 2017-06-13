@@ -117,8 +117,8 @@
                     @foreach ($complaints as $complaint)
                     <tr>
                         <td>{{ $complaint->contamination_type->description }}</td>
-                        <td>{{ $complaint->district->name }}</td>
-                        <td>{{ $complaint->status->description }}</td>
+                        <td>{{ $complaint->district ? $complaint->district->name : '-' }}</td>
+                        <td>{{ $complaint->status->name }}</td>
                         <td>{{ $complaint->created_at_formatted }}</td>
                         <td>
                             <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
