@@ -1,6 +1,13 @@
 @extends('layouts.base')
 
 @section('content')
+@if (session('access_denied'))
+<div class="row">
+    <div class="alert alert-warning">
+        {{ session('access_denied') }}
+    </div>
+</div>
+@endif
 <div class="row">
     <div class="col-xs-12">
         <div class="panel panel-default">
@@ -77,6 +84,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Filtrar</button>
+                                <a class="btn btn-default" type="button" href="{{ route('admin.complaint.index') }}">Limpiar filtros</a>
                             </div>
                         </div>
                         <div class="col-sm-8">
@@ -114,7 +122,9 @@
                         <td>{{ $complaint->created_at_formatted }}</td>
                         <td>
                             <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
-                            <a class="btn btn-default btn-xs" href="#">Ver actividades</a>
+                            @if ($complaint->is_approved)
+                            <a class="btn btn-default btn-xs" href="{{ route('admin.activity.index', compact('complaint')) }}">Ver actividades</a>
+                            @endif
                             @if ($complaint->is_completed)
                             <a class="btn btn-info btn-xs" href="#">Evaluar</a>
                             @endif

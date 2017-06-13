@@ -21,4 +21,10 @@ y luego correr
 sudo /etc/init.d/apparmor reload
 ```
 
+en el archivo de configuracion de mysql poner
+```
+[mysqld]
+secure-file-priv = ""
+```
+
 La carpeta csv sirve como pivot porque luego se elimina el archivo del servidor

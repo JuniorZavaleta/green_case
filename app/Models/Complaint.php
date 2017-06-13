@@ -82,6 +82,15 @@ class Complaint extends Model
     }
 
     /**
+     * Relationship with
+     * @return App\Models\Activity
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    /**
      * Filter for only get complaint completed
      * @param  Builder $query before apply the filter
      * @return Builder after apply the filter
@@ -119,5 +128,16 @@ class Complaint extends Model
     public function getIsCompletedAttribute()
     {
         return $this->complaint_state_id == static::COMPLETED;
+    }
+
+    /**
+     * If the complaint is or was approved
+     * @return bool
+     */
+    public function getIsApprovedAttribute()
+    {
+        return $this->complaint_state_id == static::ACCEPTED ||
+            $this->complaint_state_id == static::ON_ATTENTION ||
+            $this->complaint_state_id == static::ATTENDED;
     }
 }

@@ -10,7 +10,8 @@ use App\Models\Complaint;
 use App\Models\ComplaintStatus;
 use App\Models\District;
 use App\Models\ContaminationType;
-use App\Services\ComplaintCsvGenerator;
+
+use Csv\CsvGenerator;
 
 /**
  * ComplaintController is a class that manage the complaints applying filters
@@ -107,6 +108,13 @@ class ComplaintController extends Controller
      */
     public function show(Complaint $complaint)
     {
+        if (session('district_id')) {
+            if ($complaint->district_id != session('district_id')) {
+                return redirect()->route('admin.complaint.index')
+                    ->with('access_denied', 'Acceso Inválido');
+            }
+        }
+
         return view('admin.complaints.show', compact('complaint'));
     }
 
@@ -117,7 +125,29 @@ class ComplaintController extends Controller
     public function export()
     {
         $user = Auth::guard('admin')->user();
-        $generator = new ComplaintCsvGenerator;
+        $generator = new CsvGenerator('complaints');
+
+        $generator->setTitles(
+            'Id',
+            'Tipo contaminacion',
+            'Distrito',
+            'Estado',
+            'Fecha de registro'
+        );
+
+        $generator->setColumns(
+            'complaints.id',
+            'contamination_types.description',
+            'districts.name',
+            'complaint_states.description',
+            'complaints.created_at'
+        );
+
+        $generator->setFilename(storage_path('app/csv/casos_'.date('d_m_Y_H_i_s').'.csv'));
+
+        $generator->join('contamination_types', 'complaints.type_contamination_id', '=' ,'contamination_types.id')
+            ->join('districts', 'complaints.district_id', 'districts.id')
+            ->join('complaint_states', 'complaints.complaint_state_id', 'complaint_states.id');
 
         if (!$user->is_admin) {
             $generator->where('complaints.district_id', session('district_id'))

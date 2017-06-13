@@ -31,6 +31,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::get('/casos/exportar', 'ComplaintController@export')->name('admin.complaint.export');
         Route::get('/casos/{complaint}', 'ComplaintController@show')->name('admin.complaint.show');
 
+        Route::get('/casos/{complaint}/actividades', 'ActivityController@index')->name('admin.activity.index');
+
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });
 });
