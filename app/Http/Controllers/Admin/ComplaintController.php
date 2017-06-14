@@ -200,19 +200,18 @@ class ComplaintController extends Controller
             $complaint->complaint_status_id = Complaint::REJECTED;
             $complaint->save();
 
-            $commentary = request('commentary');
             $subject = 'Caso de contaminación rechazado';
             $view = 'complaint_rejected';
-
             $data = [
                 'contamination_type' => $complaint->contamination_type->description,
                 'district' => $complaint->district->name,
-                'reason' => $commentary,
+                'reason' => request('commentary'),
             ];
 
             $complaint->citizen->sendNotification($subject, $view, $data);
 
-            return redirect()->route('admin.complaint.index')->with('message', 'complaint rejected sucessfully');
+            return redirect()->route('admin.complaint.index')
+                ->with('message', 'Caso rechazado exitosamente.');
         }
 
         return redirect()->route('admin.complaint.index')

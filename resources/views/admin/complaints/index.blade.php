@@ -8,6 +8,13 @@
     </div>
 </div>
 @endif
+@if (session('message'))
+<div class="row">
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+</div>
+@endif
 <div class="row">
     <div class="col-xs-12">
         <div class="panel panel-default">
