@@ -22,6 +22,7 @@
     <link href="{{ asset('css/forms.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
+    @stack('extra-css')
     <style type="text/css">
         button.btn-facebook-filled { position: relative; top: 20px; }
         @media only screen and (max-width: 767px) {
@@ -103,8 +104,7 @@
 <script src="{{ asset('js/nouislider.min.js') }}"></script>
 <script src="{{ asset('js/jquery.shuffle.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
-
-@stack('extra-scripts')
-
+@stack('extra-js')
+@stack('modal')
 </body>
 </html>

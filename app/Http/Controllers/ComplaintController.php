@@ -4,61 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Support\Facades\Input;
+
 use App\Models\Complaint;
 use App\Models\ContaminationType;
-
+use App\Models\Channel;
 use App\Services\ImageUpload;
 
 class ComplaintController extends Controller
 {
-
-    public function __construct(ImageUpload $image_upload)
-    {
-       $this->image_upload = $image_upload;
-    }
-
-    public function create()
-    {
-        $contamination_types = ContaminationType::all();
-
-        $data = [
-            'contamination_types' => $contamination_types,
-        ];
-
-        return view('citizen.complaints.create', compact('contamination_types'));
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'type_contamination' => 'integer|required',
-            'latitude'           => 'required',
-            'longitude'          => 'required',
-            'commentary'         => 'string',
-            'image_1'            => 'required|image',
-            'image_2'            => 'required|image',
-            'image_3'            => 'required|image',
-        ]);
-        
-        $citizen   = Auth::guard('web')->user();
-
-        $complaint = Complaint::create([
-            'citizen_id'            => $citizen->id,
-            'type_contamination_id' => $request->contamination_type,
-            'type_communication_id' => 3,
-            'complaint_state_id'    => 2,
-            'latitude'              => 33.9,
-            'longitude'             => 33.9,
-            'commentary'            => $request->commentary
-        ]);
-        $file = $request->file('image_1');
-
-        $this->image_upload->saveImageComplaint($file, $complaint->id);
-
-        return redirect()->route('complaint.index')->with('message', 'reclamo registrado');
-    }
-
     /**
      * List the last 10 complaints completed
      * @return \Illuminate\Http\Response
@@ -70,4 +23,49 @@ class ComplaintController extends Controller
         return view('app.complaints.index', compact('complaints'));
     }
 
+    public function create()
+    {
+        $default_latitude = -12.0560257;
+        $default_longitude = -77.0844226;
+        $contamination_types = ContaminationType::all();
+
+        return view('app.complaints.create', compact(
+            'contamination_types', 'default_latitude', 'default_longitude'
+        ));
+    }
+
+    public function store(ImageUpload $image_uploader)
+    {
+        $this->validate(request(), [
+            'type_contamination' => 'integer|required',
+            'latitude'           => 'required',
+            'longitude'          => 'required',
+            'commentary'         => 'string',
+            'image_1'            => 'required|image',
+            'image_2'            => 'required|image',
+            'image_3'            => 'required|image',
+        ]);
+
+        $citizen = Auth::guard('web')->user();
+
+        $complaint = Complaint::create([
+            'citizen_id'            => $citizen->id,
+            'type_contamination_id' => request('contamination_type'),
+            'type_communication_id' => Channel::FACEBOOK,
+            'complaint_status_id'   => Complaint::COMPLETED,
+            'latitude'              => request('latitude'),
+            'longitude'             => request('longitude'),
+            'district_id'           => 1,
+            'commentary'            => request('commentary')
+        ]);
+        $file = request()->file('image_1');
+
+        try {
+            $image_uploader->saveImageComplaint($file, $complaint->id);
+        } catch (\Exception $e) {
+            $complaint->delete();
+        }
+
+        return redirect()->route('complaint.index')->with('message', 'Reclamo registrado');
+    }
 }

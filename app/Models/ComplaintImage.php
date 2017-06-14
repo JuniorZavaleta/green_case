@@ -31,9 +31,13 @@ class ComplaintImage extends Model
     public function getImgPathAttribute()
     {
         if ($this->complaint->type_communication_id == Channel::TELEGRAM) {
-            return env('BOT_HOST').$this->attributes['img'];
+            return env('BOT_HOST').$this->img;
         }
 
-        return $this->attributes['img'];
+        if ($this->complaint->type_communication_id == Channel::FACEBOOK) {
+            return asset('img/complaints/'.$this->img);
+        }
+
+        return $this->img;
     }
 }

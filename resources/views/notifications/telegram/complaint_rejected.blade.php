@@ -1,0 +1,1 @@
+Caso de contaminacion rechazado sobre {{ $contamination_type }} ubicado en el distrito de {{ $district }} por el siguiente motivo: {{ $reason }}

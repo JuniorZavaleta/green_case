@@ -28,6 +28,7 @@ class ComplaintController extends Controller
     public function __construct()
     {
         $this->per_page = 20;
+        $this->middleware('jurisdiction')->only(['show', 'getEvaluate', 'accepted', 'rejected']);
     }
 
     /**
@@ -42,7 +43,7 @@ class ComplaintController extends Controller
     public function index()
     {
         $user = Auth::guard('admin')->user();
-        $status = ComplaintStatus::pluck('description', 'id');
+        $status = ComplaintStatus::pluck('name', 'id');
         $districts = $user->is_admin ? District::orderBy('name')->pluck('name', 'id') : [];
         $contamination_types = ContaminationType::orderBy('description')->pluck('description', 'id');
 
@@ -62,7 +63,9 @@ class ComplaintController extends Controller
     {
         $query = Complaint::with('district', 'contamination_type', 'status');
 
-        if (!$user->is_admin) {
+        if ($user->is_admin) {
+            $query->withTrashed();
+        } else {
             $query->where('district_id', session('district_id'))->completed();
         }
 
@@ -108,13 +111,6 @@ class ComplaintController extends Controller
      */
     public function show(Complaint $complaint)
     {
-        if (session('district_id')) {
-            if ($complaint->district_id != session('district_id')) {
-                return redirect()->route('admin.complaint.index')
-                    ->with('access_denied', 'Acceso Inválido');
-            }
-        }
-
         return view('admin.complaints.show', compact('complaint'));
     }
 
@@ -162,5 +158,64 @@ class ComplaintController extends Controller
         $filename = $generator->execute();
 
         return response()->download($filename)->deleteFileAfterSend(true);
+    }
+
+    public function getEvaluate(Complaint $complaint)
+    {
+        return view('admin.complaints.evaluate', compact('complaint'));
+    }
+
+    public function accepted(Complaint $complaint)
+    {
+        if ($complaint->complaint_status_id == Complaint::COMPLETED) {
+            $complaint->complaint_status_id = Complaint::ACCEPTED;
+            $complaint->save();
+
+            $subject = 'Caso de contaminación aprobado';
+            $view = 'complaint_accepted';
+            $data = [
+                'contamination_type' => $complaint->contamination_type->description,
+                'district' => $complaint->district->name,
+            ];
+
+            $complaint->citizen->sendNotification($subject, $view, $data);
+
+            return redirect()->route('admin.complaint.index')
+                ->with('message', 'Caso aceptado exitosamente.');
+        }
+
+        return redirect()->route('admin.complaint.index')
+            ->with('access_denied', 'Estado de caso inválido.');
+    }
+
+    public function rejected(Complaint $complaint)
+    {
+        $this->validate(request(), [
+            'commentary' => 'min:50',
+        ], [
+            'commentary.min' => 'El comentario debe tener al menos :min carácteres',
+        ]);
+
+        if ($complaint->complaint_status_id == Complaint::COMPLETED) {
+            $complaint->complaint_status_id = Complaint::REJECTED;
+            $complaint->save();
+
+            $commentary = request('commentary');
+            $subject = 'Caso de contaminación rechazado';
+            $view = 'complaint_rejected';
+
+            $data = [
+                'contamination_type' => $complaint->contamination_type->description,
+                'district' => $complaint->district->name,
+                'reason' => $commentary,
+            ];
+
+            $complaint->citizen->sendNotification($subject, $view, $data);
+
+            return redirect()->route('admin.complaint.index')->with('message', 'complaint rejected sucessfully');
+        }
+
+        return redirect()->route('admin.complaint.index')
+            ->with('access_denied', 'Estado de caso inválido.');
     }
 }

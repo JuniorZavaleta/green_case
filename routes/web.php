@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', ['as' => 'complaint.index', 'uses' => 'ComplaintController@index']);
-Route::get('/nuevo_caso', ['as' => 'complaint.create', 'uses' => 'ComplaintController@create']);
-Route::post('/nuevo_caso', ['as' => 'complaint.store', 'uses' => 'ComplaintController@store']);
 Route::get('/', 'ComplaintController@index')->name('complaint.index');
+
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
+    Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
+});
 
 Route::get('/login', 'FacebookController@login')->name('login');
 Route::get('/facebook/login', 'FacebookController@redirect')->name('facebook.login');
@@ -30,6 +32,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::get('/casos', 'ComplaintController@index')->name('admin.complaint.index');
         Route::get('/casos/exportar', 'ComplaintController@export')->name('admin.complaint.export');
         Route::get('/casos/{complaint}', 'ComplaintController@show')->name('admin.complaint.show');
+        Route::get('/casos/evaluar/{complaint}', 'ComplaintController@getEvaluate')->name('admin.complaint.evaluate');
+        Route::get('/casos/accepted/{complaint}', 'ComplaintController@accepted')->name('admin.complaint.accepted');
+        Route::post('/casos/rejected/{complaint}', 'ComplaintController@rejected')->name('admin.complaint.rejected');
 
         Route::get('/casos/{complaint}/actividades', 'ActivityController@index')->name('admin.activity.index');
 

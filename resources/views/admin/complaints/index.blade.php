@@ -117,8 +117,8 @@
                     @foreach ($complaints as $complaint)
                     <tr>
                         <td>{{ $complaint->contamination_type->description }}</td>
-                        <td>{{ $complaint->district->name }}</td>
-                        <td>{{ $complaint->status->description }}</td>
+                        <td>{{ $complaint->district ? $complaint->district->name : '-' }}</td>
+                        <td>{{ $complaint->status->name }}</td>
                         <td>{{ $complaint->created_at_formatted }}</td>
                         <td>
                             <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
@@ -126,7 +126,7 @@
                             <a class="btn btn-default btn-xs" href="{{ route('admin.activity.index', compact('complaint')) }}">Ver actividades</a>
                             @endif
                             @if ($complaint->is_completed)
-                            <a class="btn btn-info btn-xs" href="#">Evaluar</a>
+                            <a class="btn btn-info btn-xs" href="{{ route('admin.complaint.evaluate', compact('complaint')) }}">Evaluar</a>
                             @endif
                         </td>
                     </tr>
@@ -146,7 +146,7 @@
 </div>
 @endsection
 
-@push('extra-scripts')
+@push('extra-js')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
 <script type="text/javascript" src="{{ asset('js/moment-with-locales.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>

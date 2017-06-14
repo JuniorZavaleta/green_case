@@ -3,22 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Complaint extends Model
 {
+    use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-                            'citizen_id',
-                            'authority_id',
-                            'type_contamination_id',
-                            'type_communication_id',
-                            'complaint_state_id',
-                            'latitude',
-                            'longitude',
-                            'commentary'
-                          ];
+        'citizen_id',
+        'district_id',
+        'type_contamination_id',
+        'type_communication_id',
+        'complaint_status_id',
+        'latitude',
+        'longitude',
+        'commentary'
+    ];
 
-    protected $table = 'complaints';
+     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     const INCOMPLETED = 1;
     const COMPLETED = 2;
@@ -78,7 +90,7 @@ class Complaint extends Model
      */
     public function status()
     {
-        return $this->belongsTo(ComplaintStatus::class, 'complaint_state_id');
+        return $this->belongsTo(ComplaintStatus::class, 'complaint_status_id');
     }
 
     /**
@@ -97,7 +109,7 @@ class Complaint extends Model
      */
     public function scopeCompleted($query)
     {
-        return $query->where('complaint_state_id', '!=' ,static::INCOMPLETED);
+        return $query->where('complaint_status_id', '!=' ,static::INCOMPLETED);
     }
 
     /**
@@ -107,7 +119,7 @@ class Complaint extends Model
      */
     public function scopeIncompleted($query)
     {
-        return $query->where('complaint_state_id', static::INCOMPLETED);
+        return $query->where('complaint_status_id', static::INCOMPLETED);
     }
 
     /**
@@ -127,7 +139,7 @@ class Complaint extends Model
      */
     public function getIsCompletedAttribute()
     {
-        return $this->complaint_state_id == static::COMPLETED;
+        return $this->complaint_status_id == static::COMPLETED;
     }
 
     /**
@@ -136,8 +148,8 @@ class Complaint extends Model
      */
     public function getIsApprovedAttribute()
     {
-        return $this->complaint_state_id == static::ACCEPTED ||
-            $this->complaint_state_id == static::ON_ATTENTION ||
-            $this->complaint_state_id == static::ATTENDED;
+        return $this->complaint_status_id == static::ACCEPTED ||
+            $this->complaint_status_id == static::ON_ATTENTION ||
+            $this->complaint_status_id == static::ATTENDED;
     }
 }

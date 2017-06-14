@@ -11,10 +11,10 @@ class ComplaintStatus extends Model
      *
      * @var string
      */
-    protected $table = 'complaint_states';
+    protected $table = 'complaint_status';
 
     public function complaints()
     {
-        return $this->hasMany(Complaint::class, 'complaint_state_id');
+        return $this->hasMany(Complaint::class, 'complaint_status_id');
     }
 }
