@@ -68,7 +68,7 @@
                         </ul>
                     @elseif (is_bool(strpos(Route::current()->uri, 'admin')))
                         <!-- Always false if is bool, then is not admin -->
-                        <button onClick="javascript:window.location.href='{{ route('facebook.login') }}'" class="btn btn-facebook-filled"><i class="fa fa-facebook"></i> Inicio con Facebook</button>
+                        <button onClick="javascript:window.location.href='{{ route('facebook.login') }}'" class="btn btn-facebook-filled btn-square"><i class="fa fa-facebook"></i> Inicio con Facebook</button>
                     @endif
                     </li>
                 </ul>

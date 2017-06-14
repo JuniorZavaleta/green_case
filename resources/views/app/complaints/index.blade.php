@@ -1,6 +1,11 @@
 @extends('layouts.base')
 
 @section('content')
+@if (session('message'))
+<div role="alert" class="alert alert-success">
+    {{ session('message') }}
+</div>
+@endif
 <div class="row">
     <div class="text-center">
         <h2>Lista de casos de contaminación</h2>
@@ -9,7 +14,7 @@
 @if (Auth::guard('web')->user())
 <div class="row">
     <div class="text-center">
-        <a class="btn btn-success" href="{{ route('complaint.create') }}" type="button">¡Registrar caso!</a>
+        <a class="btn btn-success btn-square" href="{{ route('complaint.create') }}" type="button">¡Registrar caso!</a>
     </div>
 </div>
 @endif

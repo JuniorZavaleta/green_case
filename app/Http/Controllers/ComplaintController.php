@@ -66,6 +66,7 @@ class ComplaintController extends Controller
             $complaint->delete();
         }
 
-        return redirect()->route('complaint.index')->with('message', 'Reclamo registrado');
+        return redirect()->route('complaint.index')
+            ->with('message', 'Gracias por registrar tu reclamo. Te enviaremos un correo sobre las actualizaciones de tu reclamo');
     }
 }
