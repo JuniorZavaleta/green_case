@@ -8,7 +8,7 @@
                 <div class="panel-title">Lista de casos de contaminación</div>
             </div>
             <div class="panel-body">
-            @if (count($activities) > 0)
+            @if (count($complaint->activities) > 0)
                 <table class="table table-hover">
                     <thead>
                         <th>Título</th>
@@ -16,7 +16,7 @@
                         <th>Fecha de registro</th>
                     </thead>
                     <tbody>
-                    @foreach ($activities as $activity)
+                    @foreach ($complaint->activities as $activity)
                     <tr>
                         <td>{{ $activity->title }}</td>
                         <td>{{ $activity->short_description }}</td>
@@ -34,7 +34,7 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <a class="btn btn-success" type="button" href="#">Agregar actividad</a>
+        <a class="btn btn-success" type="button" href="{{ route('admin.activity.create', compact('complaint')) }}">Agregar actividad</a>
     </div>
 </div>
 @endsection

@@ -37,6 +37,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::post('/casos/rejected/{complaint}', 'ComplaintController@rejected')->name('admin.complaint.rejected');
 
         Route::get('/casos/{complaint}/actividades', 'ActivityController@index')->name('admin.activity.index');
+        Route::get('/casos/{complaint}/actividades/nuevo', 'ActivityController@create')->name('admin.activity.create');
 
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });
