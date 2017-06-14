@@ -91,13 +91,13 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Filtrar</button>
-                                <a class="btn btn-default" type="button" href="{{ route('admin.complaint.index') }}">Limpiar filtros</a>
+                                <button type="submit" class="btn btn-primary btn-square">Filtrar</button>
+                                <a class="btn btn-default btn-square" type="button" href="{{ route('admin.complaint.index') }}">Limpiar filtros</a>
                             </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="form-group">
-                                <a class="btn btn-success pull-right" type="button" target="_blank" href="{{ route('admin.complaint.export', request()->all()) }}">Exportar</a>
+                                <a class="btn btn-success btn-square pull-right" type="button" target="_blank" href="{{ route('admin.complaint.export', request()->all()) }}">Exportar</a>
                             </div>
                         </div>
                     </div>
@@ -135,14 +135,14 @@
                         <td>{{ $complaint->status->name }}</td>
                         <td>{{ $complaint->created_at_formatted }}</td>
                         <td>
-                            <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
+                            <a class="btn btn-default btn-sm btn-square" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
                             @if ($complaint->is_approved)
                             <!-- Only show the button to activities if the complaint is approved -->
-                            <a class="btn btn-default btn-xs" href="{{ route('admin.activity.index', compact('complaint')) }}">Ver actividades</a>
+                            <a class="btn btn-default btn-sm btn-square" href="{{ route('admin.activity.index', compact('complaint')) }}">Ver actividades</a>
                             @endif
                             @if ($complaint->is_completed)
                             <!-- Only show the button to activities if the complaint is completed or registered -->
-                            <a class="btn btn-info btn-xs" href="{{ route('admin.complaint.evaluate', compact('complaint')) }}">Evaluar</a>
+                            <a class="btn btn-info btn-sm btn-square" href="{{ route('admin.complaint.evaluate', compact('complaint')) }}">Evaluar</a>
                             @endif
                         </td>
                     </tr>
