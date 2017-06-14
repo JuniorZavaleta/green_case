@@ -37,6 +37,7 @@
                             </div>
                         </div>
                         @if ($user->is_admin)
+                        <!-- Only show the districts for admin -->
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Distrito</label>
@@ -115,7 +116,10 @@
                 <table class="table table-hover">
                     <thead>
                         <th>Tipo de Contaminación</th>
+                        @if ($user->is_admin)
+                        <!-- Only show the district for admin -->
                         <th>Distrito</th>
+                        @endif
                         <th>Estado</th>
                         <th>Fecha de registro</th>
                         <th>Acciones</th>
@@ -124,15 +128,20 @@
                     @foreach ($complaints as $complaint)
                     <tr>
                         <td>{{ $complaint->contamination_type->description }}</td>
+                        @if ($user->is_admin)
+                        <!-- Only show the district for admin -->
                         <td>{{ $complaint->district ? $complaint->district->name : '-' }}</td>
+                        @endif
                         <td>{{ $complaint->status->name }}</td>
                         <td>{{ $complaint->created_at_formatted }}</td>
                         <td>
                             <a class="btn btn-default btn-xs" href="{{ route('admin.complaint.show', compact('complaint')) }}">Ver detalle</a>
                             @if ($complaint->is_approved)
+                            <!-- Only show the button to activities if the complaint is approved -->
                             <a class="btn btn-default btn-xs" href="{{ route('admin.activity.index', compact('complaint')) }}">Ver actividades</a>
                             @endif
                             @if ($complaint->is_completed)
+                            <!-- Only show the button to activities if the complaint is completed or registered -->
                             <a class="btn btn-info btn-xs" href="{{ route('admin.complaint.evaluate', compact('complaint')) }}">Evaluar</a>
                             @endif
                         </td>
@@ -159,14 +168,12 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
 <script type="text/javascript">
 $(function() {
-    $('#start_date').datetimepicker({
+    var settings_date = {
         viewMode: 'days',
         format: 'DD/MM/YYYY'
-    });
-    $('#end_date').datetimepicker({
-        viewMode: 'days',
-        format: 'DD/MM/YYYY'
-    });
+    };
+    $('#start_date').datetimepicker(settings_date);
+    $('#end_date').datetimepicker(settings_date);
 });
 </script>
 @endpush
