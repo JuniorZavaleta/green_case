@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('app.layout.base')
 
 @section('content')
 @if (session('message'))

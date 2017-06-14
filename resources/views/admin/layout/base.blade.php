@@ -1,8 +1,3 @@
-@php
-    $admin = Auth::guard('admin')->user();
-    $is_admin = $admin != null;
-    $user = $is_admin ? $admin : Auth::guard('web')->user();
-@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,23 +29,16 @@
 <body class="-text aside-float">
 
 <!-- header -->
-@include('layouts.header')
-<!-- content -->
+@include('admin.layout.header')
 <div class="wrapper">
-  @if (Auth::guard('admin')->user())
-    @include('layouts.sidebar')
-    <!-- content here-->
-    <section>
-      <div class="content-wrapper">
-        @yield('content')
-      </div>
-    </section>
-  @else
-<div class="content-wrapper">
-        @yield('content')
-      </div>
-  @endif
-  <!-- end content -->
+  @include('admin.layout.sidebar')
+  <section>
+    <div class="content-wrapper">
+    <!-- content -->
+      @yield('content')
+    <!-- end content -->
+    </div>
+  </section>
 </div>
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>

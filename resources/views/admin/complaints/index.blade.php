@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('admin.layout.base')
 
 @section('content')
 @if (session('access_denied'))
