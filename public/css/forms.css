@@ -356,15 +356,11 @@ html {
   -ms-touch-action: manipulation;
   touch-action: manipulation;
 }
-html,
-body {
-  height: 100%;
-}
 .wrapper {
   position: relative;
   width: 100%;
   height: auto;
-  /*min-height: 100%;*/
+  min-height: 100%;
   overflow-x: hidden;
 }
 .wrapper.ng-leave {
@@ -402,7 +398,6 @@ body {
   height: 100%;
   margin-left: 0;
   z-index: 111;
-  background-color: #f5f7fa;
 }
 .wrapper > footer {
   position: absolute;
@@ -421,7 +416,6 @@ body {
   z-index: 0;
 }
 .content-wrapper {
-  padding: 15px;
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
   margin-top: -1px;
@@ -462,9 +456,6 @@ body {
   padding-right: 0;
 }
 @media only screen and (min-width: 768px) {
-  .content-wrapper {
-    padding: 20px;
-  }
   .content-wrapper > h3,
   .content-wrapper > .content-heading {
     margin: -20px;
@@ -866,7 +857,6 @@ _:-ms-lang(x),
   border: 0;
 }
 .aside-float .wrapper > .aside {
-  padding: 15px 0;
   background: transparent;
 }
 .aside-float .wrapper > .aside > .aside-inner {
@@ -874,9 +864,6 @@ _:-ms-lang(x),
   top: 15px;
   bottom: 15px;
   left: inherit;
-}
-.aside-float .wrapper > .aside .sidebar {
-  border: 1px solid #e4eaec;
 }
 .aside-float .wrapper > .aside .sidebar:after {
   display: none;
@@ -923,9 +910,6 @@ _:-ms-lang(x),
   }
   .aside-float.layout-fs .wrapper > section > .content-wrapper {
     padding: 0 0 0 20px;
-  }
-  .aside-float .wrapper > .aside > .aside-inner {
-    margin-left: 15px;
   }
 }
 @media only screen and (min-width: 992px) {

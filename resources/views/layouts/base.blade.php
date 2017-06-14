@@ -31,22 +31,26 @@
     </style>
 </head>
 
-<body style="overflow: visible;">
+<body class="-text aside-float">
 
 <!-- header -->
 @include('layouts.header')
 <!-- content -->
 <div class="wrapper">
-  @if (!$is_admin)
-    @yield('content')
-  @else
+  @if (Auth::guard('admin')->user())
     @include('layouts.sidebar')
     <!-- content here-->
     <section>
-      @yield('content')
+      <div class="content-wrapper">
+        @yield('content')
+      </div>
     </section>
-    <!-- end content -->
+  @else
+<div class="content-wrapper">
+        @yield('content')
+      </div>
   @endif
+  <!-- end content -->
 </div>
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>

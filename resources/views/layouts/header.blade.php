@@ -6,7 +6,7 @@
                <img style="width: 30%" src="{{ asset('img/logo.png') }}" alt="App Logo" class="img-responsive">
             </div>
             <div class="brand-logo-collapsed">
-               <img src="img/logo-single.png" alt="App Logo" class="img-responsive">
+               <img src="{{ asset('img/logo.png') }}" alt="App Logo" class="img-responsive">
             </div>
          </a>
       </div>
