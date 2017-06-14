@@ -135,7 +135,7 @@ class ComplaintController extends Controller
             'complaints.id',
             'contamination_types.description',
             'districts.name',
-            'complaint_states.description',
+            'complaint_status.name',
             'complaints.created_at'
         );
 
@@ -143,14 +143,14 @@ class ComplaintController extends Controller
 
         $generator->join('contamination_types', 'complaints.type_contamination_id', '=' ,'contamination_types.id')
             ->join('districts', 'complaints.district_id', 'districts.id')
-            ->join('complaint_states', 'complaints.complaint_state_id', 'complaint_states.id');
+            ->join('complaint_status', 'complaints.complaint_status_id', 'complaint_status.id');
 
         if (!$user->is_admin) {
             $generator->where('complaints.district_id', session('district_id'))
-                      ->whereNot('complaint_state_id', Complaint::INCOMPLETED);
+                      ->whereNot('complaint_status_id', Complaint::INCOMPLETED);
         }
 
-        $generator->whereIf('complaint_states.description', request('estado'))
+        $generator->whereIf('complaint_status.description', request('estado'))
                   ->whereIf('districts.name', request('distrito'))
                   ->whereIf('contamination_types.description', request('tipo_contaminacion'))
                   ->orderBy('complaints.id', 'DESC');
