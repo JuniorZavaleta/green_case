@@ -83,7 +83,7 @@ class ComplaintController extends Controller
 
         if (request('estado')) {
             $query->whereHas('status', function ($q) {
-                $q->where('description', request('estado'));
+                $q->where('name', request('estado'));
             });
         }
 
