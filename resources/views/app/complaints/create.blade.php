@@ -4,6 +4,15 @@
 <div class="row">
     <h2>Registrar caso de contaminación</h2>
 </div>
+
+@if ($errors->all())
+    <ul class="parsley-errors-list filled">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
 <div class="row">
     <div class="col-xs-12">
     <form class="form-horizontal" method="POST" enctype="multipart/form-data">

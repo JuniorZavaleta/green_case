@@ -36,6 +36,16 @@ class ComplaintController extends Controller
 
     public function store(ImageUpload $image_uploader)
     {
+        $this->validate(request(), [
+            'type_contamination' => 'integer|required',
+            'latitude'           => 'required',
+            'longitude'          => 'required',
+            'commentary'         => 'string',
+            'image_1'            => 'required|image',
+            'image_2'            => 'required|image',
+            'image_3'            => 'required|image',
+        ]);
+
         $citizen = Auth::guard('web')->user();
 
         $complaint = Complaint::create([
