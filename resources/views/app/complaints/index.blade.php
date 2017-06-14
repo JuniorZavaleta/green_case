@@ -13,6 +13,7 @@
     </div>
 </div>
 @endif
+<hr></hr>
 <div class="row">
     @foreach ($complaints as $complaint)
     <div class="col-sm-4">
