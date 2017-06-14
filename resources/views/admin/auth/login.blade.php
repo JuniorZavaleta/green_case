@@ -1,8 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+<div class="block-center mt-xl wd-xl">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">Login</div>
@@ -38,6 +37,5 @@
                 </form>
             </div>
         </div>
-    </div>
 </div>
 @endsection
