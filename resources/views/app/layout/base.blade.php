@@ -32,7 +32,7 @@
 <!-- header -->
 @include('app.layout.header')
 <div class="wrapper">
-  <div class="container">
+  <div class="container" style="padding-top: 10px;">
     <!-- content -->
     @yield('content')
     <!-- end content -->

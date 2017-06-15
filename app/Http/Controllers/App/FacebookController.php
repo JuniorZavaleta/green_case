@@ -55,7 +55,7 @@ class FacebookController extends Controller
 
         Auth::login($citizen);
 
-        return redirect('/')->with('message', 'OK');
+        return redirect('/')->with('message', "¡Hola, {$citizen->name}!");
     }
 
     /**
