@@ -1,8 +1,6 @@
 /* Base CSS */
 body {
   color: #666666;
-  background: #fefefe;
-  font-family: "Raleway", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
@@ -10,7 +8,6 @@ body {
 }
 
 html, body {
-  height: 100%;
   max-height: 100%;
   margin: 0;
 }
@@ -22,7 +19,6 @@ html * {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: #222222;
-  font-family: "Raleway", sans-serif;
   font-weight: 500;
   letter-spacing: 0.5px;
   margin-top: 0;
@@ -80,7 +76,6 @@ p {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #666666;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
 }
@@ -148,10 +143,6 @@ cite {
   font-size: 12px;
 }
 
-strong {
-  font-weight: 500;
-}
-
 .text-uppercase {
   text-transform: uppercase;
 }
@@ -213,19 +204,16 @@ strong {
 .bg-primary {
   color: white;
   background: #4cbbdb;
-  padding: 3px 4px;
 }
 
 .bg-success {
   color: white;
   background: #83be50;
-  padding: 3px 4px;
 }
 
 .bg-info {
   color: white;
   background: #44a1e1;
-  padding: 3px 4px;
 }
 
 .bg-warning {
@@ -1419,7 +1407,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 
 .navbar-brand > img {
   width: auto;
-  max-height: 70px;
+  max-height: 50px;
   position: relative;
   right: 50px;
 }
@@ -1768,7 +1756,7 @@ header p {
 /* End Headers */
 /* Content */
 section {
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 /* Categories */

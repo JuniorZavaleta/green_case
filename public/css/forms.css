@@ -356,10 +356,6 @@ html {
   -ms-touch-action: manipulation;
   touch-action: manipulation;
 }
-html,
-body {
-  height: 100%;
-}
 .wrapper {
   position: relative;
   width: 100%;
@@ -383,7 +379,6 @@ body {
   background-color: #fff;
 }
 .wrapper > .aside .aside-inner {
-  padding-top: 110px;
   height: 100%;
   width: 220px;
   overflow: hidden;
@@ -403,8 +398,6 @@ body {
   height: 100%;
   margin-left: 0;
   z-index: 111;
-  background-color: #f5f7fa;
-  margin-bottom: 60px !important;
 }
 .wrapper > footer {
   position: absolute;
@@ -423,7 +416,6 @@ body {
   z-index: 0;
 }
 .content-wrapper {
-  padding: 15px;
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
   margin-top: -1px;
@@ -464,9 +456,6 @@ body {
   padding-right: 0;
 }
 @media only screen and (min-width: 768px) {
-  .content-wrapper {
-    padding: 20px;
-  }
   .content-wrapper > h3,
   .content-wrapper > .content-heading {
     margin: -20px;
@@ -481,9 +470,6 @@ body {
 @media only screen and (min-width: 768px) {
   body {
     min-height: 100%;
-  }
-  .wrapper > .aside .aside-inner {
-    padding-top: 55px;
   }
   .wrapper > section,
   .wrapper > footer {
@@ -871,7 +857,6 @@ _:-ms-lang(x),
   border: 0;
 }
 .aside-float .wrapper > .aside {
-  padding: 15px 0;
   background: transparent;
 }
 .aside-float .wrapper > .aside > .aside-inner {
@@ -879,9 +864,6 @@ _:-ms-lang(x),
   top: 15px;
   bottom: 15px;
   left: inherit;
-}
-.aside-float .wrapper > .aside .sidebar {
-  border: 1px solid #e4eaec;
 }
 .aside-float .wrapper > .aside .sidebar:after {
   display: none;
@@ -928,9 +910,6 @@ _:-ms-lang(x),
   }
   .aside-float.layout-fs .wrapper > section > .content-wrapper {
     padding: 0 0 0 20px;
-  }
-  .aside-float .wrapper > .aside > .aside-inner {
-    margin-left: 15px;
   }
 }
 @media only screen and (min-width: 992px) {
@@ -1186,15 +1165,6 @@ _:-ms-lang(x),
   }
 }
 @media only screen and (min-width: 768px) {
-  .topnavbar {
-    border: 0;
-    background-color: #23b7e5;
-    background-image: -webkit-linear-gradient(left, #23b7e5 0%, #51c6ea 100%);
-    background-image: -o-linear-gradient(left, #23b7e5 0%, #51c6ea 100%);
-    background-image: linear-gradient(to right, #23b7e5 0%, #51c6ea 100%);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff23b7e5', endColorstr='#ff51c6ea', GradientType=1);
-  }
   .topnavbar .navbar-header {
     background-image: none;
     background-repeat: no-repeat;
@@ -7323,7 +7293,7 @@ body .jvectormap-zoomout {
   color: inherit;
 }
 .bg-success {
-  background-color: #27c24c;
+  background-color: #83be50;
   color: #fff !important;
 }
 .bg-success-light {

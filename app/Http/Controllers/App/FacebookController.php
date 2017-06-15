@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Socialite;
 use Auth;
@@ -54,7 +55,7 @@ class FacebookController extends Controller
 
         Auth::login($citizen);
 
-        return redirect('/')->with('message', 'OK');
+        return redirect('/')->with('message', "¡Hola, {$citizen->name}!");
     }
 
     /**

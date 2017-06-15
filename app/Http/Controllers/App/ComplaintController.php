@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Auth;
 
 use App\Models\Complaint;
@@ -12,17 +12,6 @@ use App\Services\ImageUpload;
 
 class ComplaintController extends Controller
 {
-    /**
-     * List the last 10 complaints completed
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $complaints = Complaint::completed()->latest()->paginate(10);
-
-        return view('app.complaints.index', compact('complaints'));
-    }
-
     public function create()
     {
         $default_latitude = -12.0560257;

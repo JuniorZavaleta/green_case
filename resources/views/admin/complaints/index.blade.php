@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('admin.layout.base')
 
 @section('content')
 @if (session('access_denied'))
@@ -151,10 +151,6 @@
                 </table>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
     </div>
 </div>
 <div class="row">
