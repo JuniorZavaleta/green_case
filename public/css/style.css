@@ -1417,7 +1417,7 @@ table.shopping-cart > thead > tr > th, table > thead > tr > td {
 
 .navbar-brand > img {
   width: auto;
-  max-height: 70px;
+  max-height: 50px;
   position: relative;
   right: 50px;
 }

@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- favicon -->
     <link rel="icon" href="http://kingstudio.ro/demos/incart/images/favicon.png">
@@ -31,7 +32,7 @@
 <!-- header -->
 @include('app.layout.header')
 <div class="wrapper">
-  <div class="content-wrapper">
+  <div class="container">
     <!-- content -->
     @yield('content')
     <!-- end content -->
@@ -45,6 +46,13 @@
 <script src="{{ asset('js/nouislider.min.js') }}"></script>
 <script src="{{ asset('js/jquery.shuffle.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>
 @stack('extra-js')
 @stack('modal')
 </body>

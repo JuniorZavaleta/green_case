@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav">
           <li class="dropdown">
           @if (Auth::user('web'))
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->name }} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user('web')->name }} <span class="caret"></span></a>
 
             <ul class="dropdown-menu pulse animated">
               <li><a href="{{ route('citizen.logout') }}">Logout</a></li>
