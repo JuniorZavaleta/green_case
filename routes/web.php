@@ -14,6 +14,7 @@
 Route::group(['namespace' => 'App'], function () {
     Route::get('/', 'IndexController@index')->name('complaint.index');
     Route::post('/ocultar_mensaje', 'IndexController@hideSupportMessage')->name('index.hide_message');
+    Route::get('/siguientes_casos', 'IndexController@nextComplaints')->name('index.next_complaints');
 
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
