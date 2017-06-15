@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" style="border: 0;">
     <div class="container">
       <div class="navbar-header" style="padding-bottom: 20px">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
