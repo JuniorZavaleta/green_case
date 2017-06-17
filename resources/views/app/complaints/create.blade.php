@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="width: 700px; margin-right: auto; margin-left: auto;">
                 <div class="col-xs-3 col-xs-offset-1 col-sm-2">
                     <label class="control-label">Ubicación</label>
                 </div>
