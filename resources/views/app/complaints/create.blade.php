@@ -70,8 +70,7 @@
                 <div class="col-xs-3 col-xs-offset-1 col-sm-2">
                     <label class="control-label">Comentario</label>
                 </div>
-                <textarea rows="4" cols="50" name="commentary">
-                </textarea>
+                <textarea rows="4" cols="50" name="commentary"></textarea>
             </div>
 
             <div class="form-group">
