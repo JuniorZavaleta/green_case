@@ -11,17 +11,21 @@
 |
 */
 
-Route::get('/', 'ComplaintController@index')->name('complaint.index');
+Route::group(['namespace' => 'App'], function () {
+    Route::get('/', 'IndexController@index')->name('complaint.index');
+    Route::post('/ocultar_mensaje', 'IndexController@hideSupportMessage')->name('index.hide_message');
+    Route::get('/siguientes_casos', 'IndexController@nextComplaints')->name('index.next_complaints');
 
-Route::group(['middleware' => 'auth:web'], function () {
-    Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
-    Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
+    Route::group(['middleware' => 'auth:web'], function () {
+        Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
+        Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
+    });
+
+    Route::get('/login', 'FacebookController@login')->name('login');
+    Route::get('/facebook/login', 'FacebookController@redirect')->name('facebook.login');
+    Route::get('/facebook/callback', 'FacebookController@callback')->name('facebook.callback');
+    Route::get('/logout', 'FacebookController@logout')->name('citizen.logout');
 });
-
-Route::get('/login', 'FacebookController@login')->name('login');
-Route::get('/facebook/login', 'FacebookController@redirect')->name('facebook.login');
-Route::get('/facebook/callback', 'FacebookController@callback')->name('facebook.callback');
-Route::get('/logout', 'FacebookController@logout')->name('citizen.logout');
 
 Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
     Route::get('/casos', ['as' => 'admin.complaint.index', 'uses' => 'ComplaintController@index']);
@@ -37,6 +41,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::post('/casos/rejected/{complaint}', 'ComplaintController@rejected')->name('admin.complaint.rejected');
 
         Route::get('/casos/{complaint}/actividades', 'ActivityController@index')->name('admin.activity.index');
+        Route::get('/casos/{complaint}/actividades/nuevo', 'ActivityController@create')->name('admin.activity.create');
 
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });

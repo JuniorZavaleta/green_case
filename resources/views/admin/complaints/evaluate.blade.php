@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('admin.layout.base')
 
 @section('content')
 @if ($errors->first())
@@ -50,7 +50,7 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <a class="btn btn-default" href="{{ route('admin.complaint.index') }}">Regresar</a>
+                    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">Regresar</a>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('app.layout.base')
 
 @section('content')
 <div class="row">
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="width: 700px; margin-right: auto; margin-left: auto;">
                 <div class="col-xs-3 col-xs-offset-1 col-sm-2">
                     <label class="control-label">Ubicación</label>
                 </div>
@@ -85,29 +85,5 @@
     </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}"></script>
-<script>
-var map;
-var marker;
-var uluru = {lat: {{ $default_latitude }}, lng: {{ $default_longitude }}};
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: uluru
-    });
-
-    marker = new google.maps.Marker({
-      position: uluru,
-      map: map,
-      draggable: true,
-    });
-}
-
-initMap();
-
-google.maps.event.addListener(marker, "dragend", function (event) {
-    document.getElementById("latitude").value = this.getPosition().lat();
-    document.getElementById("longitude").value = this.getPosition().lng();
-});
-</script>
+<script src="{{ asset('js/location.js') }}"></script>
 @endsection

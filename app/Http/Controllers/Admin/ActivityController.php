@@ -10,8 +10,16 @@ class ActivityController extends Controller
 {
     public function index(Complaint $complaint)
     {
-        $activities = $complaint->activities;
+        return view('admin.activity.index', compact('complaint'));
+    }
 
-        return view('admin.activity.index', compact('activities'));
+    public function create(Complaint $complaint)
+    {
+        $default_latitude = -12.0560257;
+        $default_longitude = -77.0844226;
+
+        return view('admin.activity.create',
+            compact('complaint', 'default_latitude', 'default_longitude')
+        );
     }
 }
