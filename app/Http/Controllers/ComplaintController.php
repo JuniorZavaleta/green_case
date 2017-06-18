@@ -37,7 +37,7 @@ class ComplaintController extends Controller
     public function store(ImageUpload $image_uploader)
     {
         $this->validate(request(), [
-            'type_contamination' => 'integer|required',
+            'contamination_type' => 'required',
             'latitude'           => 'required',
             'longitude'          => 'required',
             'commentary'         => 'string',
