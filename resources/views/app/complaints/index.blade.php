@@ -10,7 +10,7 @@
 </div>
 @endif
 @if (Auth::guard('web')->user())
-<div class="row">
+<div class="row mb-lg">
   <div class="text-center">
     <a class="btn btn-success btn-square" href="{{ route('complaint.create') }}" type="button">¡Registrar caso!</a>
   </div>
@@ -23,7 +23,7 @@
   <div class="text-center">¡Si deseas apoyarnos con algún caso que conozcas puedes registrarte con Facebook y registrarlo!</div>
 </div>
 @endif
-<div class="row">
+<div class="row mb-lg">
   @foreach ($complaints as $complaint)
   <div class="col-sm-4">
     <div class="panel">

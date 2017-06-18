@@ -22,4 +22,9 @@ class ActivityController extends Controller
             compact('complaint', 'default_latitude', 'default_longitude')
         );
     }
+
+    public function store(Complaint $complaint)
+    {
+
+    }
 }
