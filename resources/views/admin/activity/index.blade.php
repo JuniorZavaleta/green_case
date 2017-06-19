@@ -5,7 +5,7 @@
   <div class="col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Lista de casos de contaminación</div>
+        <div class="panel-title">Lista de actividades del caso de contaminación #{{ $complaint->id }}</div>
       </div>
       <div class="panel-body">
       @if (count($complaint->activities) > 0)
@@ -38,6 +38,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
+    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">Regresar</a>
     <a class="btn btn-success btn-square" type="button" href="{{ route('admin.activity.create', compact('complaint')) }}">Agregar actividad</a>
   </div>
 </div>

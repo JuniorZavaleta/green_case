@@ -6,7 +6,7 @@
           <span data-localize="sidebar.heading.HEADER">Menú</span>
         </li>
         <li class="active">
-          <a href="{{ route('admin.complaint.index') }}" title="Lista de casos" data-toggle="collapse" class="" aria-expanded="true">
+          <a href="{{ route('admin.complaint.index') }}" title="Lista de casos" class="" aria-expanded="true">
             <em class="icon-speedometer"></em>
             <span data-localize="sidebar.nav.DASHBOARD">Lista de casos</span>
           </a>
