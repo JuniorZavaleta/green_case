@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Complaint;
+use App\Models\Activity;
+
+use App\Services\ImageUpload;
 
 class ActivityController extends Controller
 {
@@ -23,8 +26,35 @@ class ActivityController extends Controller
         );
     }
 
-    public function store(Complaint $complaint)
+    public function store(Complaint $complaint, ImageUpload $image_uploader)
     {
+        $this->validate(request(), [
+            'titulo'      => 'required',
+            'descripcion' => 'required',
+            'files'       => 'required',
+            'files.*'     => 'image'
+        ], [
+            'files.required' => 'Debe ingresar al menos una imagen',
+        ]);
 
+        $activity = $complaint->activities()->create([
+            'title' => request('titulo'),
+            'description' => request('descripcion')
+        ]);
+
+        foreach (request('files') as $key => $image) {
+            $filename = "img/actividades/actividad_{$activity->id}_{$key}";
+            $path = $image_uploader->save($image, $filename);
+
+            $activity->images()->create(['img' => $path]);
+        }
+
+        return redirect()->route('admin.activity.index', compact('complaint'))
+            ->with('message', 'Actividad registrada exitosamente.');
+    }
+
+    public function show(Complaint $complaint, Activity $activity)
+    {
+        return view('admin.activity.show', compact('complaint', 'activity'));
     }
 }

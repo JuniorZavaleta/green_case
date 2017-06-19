@@ -43,6 +43,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::get('/casos/{complaint}/actividades', 'ActivityController@index')->name('admin.activity.index');
         Route::get('/casos/{complaint}/actividades/nuevo', 'ActivityController@create')->name('admin.activity.create');
         Route::post('/casos/{complaint}/actividades/nuevo', 'ActivityController@store')->name('admin.activity.store');
+        Route::get('/casos/{complaint}/actividades/{activity}', 'ActivityController@show')->name('admin.activity.show');
 
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });

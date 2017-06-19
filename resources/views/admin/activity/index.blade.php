@@ -14,6 +14,7 @@
             <th>Título</th>
             <th>Descripción</th>
             <th>Fecha de registro</th>
+            <th>Acciones</th>
           </thead>
           <tbody>
           @foreach ($complaint->activities as $activity)
@@ -21,6 +22,9 @@
             <td>{{ $activity->title }}</td>
             <td>{{ $activity->short_description }}</td>
             <td>{{ $activity->created_at }}</td>
+            <td>
+                <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">Ver</a>
+            </td>
           </tr>
           @endforeach
           </tbody>

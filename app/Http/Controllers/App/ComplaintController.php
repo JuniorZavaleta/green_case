@@ -57,8 +57,7 @@ class ComplaintController extends Controller
             'commentary'            => request('commentary')
         ]);
 
-        $files = request('files');
-        foreach ($files as $key => $image) {
+        foreach (request('files') as $key => $image) {
             $filename = "img/reclamos/reclamo_{$complaint->id}_{$key}";
             $path = $image_uploader->save($image, $filename);
 

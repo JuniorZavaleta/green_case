@@ -12,12 +12,31 @@ class Activity extends Model
     const MAX_LEN_SHORT_DESCRIPTION = 60;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'description',
+    ];
+
+    /**
      * Relationship with complaint
      * @return Complaint
      */
     public function complaint()
     {
         return $this->belongsTo(Complaint::class);
+    }
+
+    /**
+     * Relationship with images
+     * @return ActivityImage
+     */
+    public function images()
+    {
+        return $this->hasMany(ActivityImage::class);
     }
 
     /**
