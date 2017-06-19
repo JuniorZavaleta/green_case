@@ -29,10 +29,8 @@ class ComplaintController extends Controller
             'contamination_type' => 'required',
             'latitude'           => 'required',
             'longitude'          => 'required',
-            'commentary'         => 'string',
-            'image_1'            => 'required|image',
-            'image_2'            => 'required|image',
-            'image_3'            => 'required|image',
+            'files'              => 'required',
+            'files.*'            => 'image'
         ]);
 
         $citizen = Auth::guard('web')->user();
@@ -47,12 +45,13 @@ class ComplaintController extends Controller
             'district_id'           => 1,
             'commentary'            => request('commentary')
         ]);
-        $file = request()->file('image_1');
 
-        try {
-            $image_uploader->saveImageComplaint($file, $complaint->id);
-        } catch (\Exception $e) {
-            $complaint->delete();
+        $files = request('files');
+        foreach ($files as $key => $image) {
+            $filename = "img/reclamos/reclamo_{$complaint->id}_{$key}";
+            $path = $image_uploader->save($image, $filename);
+
+            $complaint->images()->create(['img' => $path]);
         }
 
         return redirect()->route('complaint.index')
