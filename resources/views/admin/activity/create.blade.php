@@ -14,17 +14,17 @@
 @endif
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 col-sm-9">
     <form id="fileupload" class="" method="POST" enctype="multipart/form-data">
       {!! csrf_field() !!}
       <div class="form-group">
         <label>Título</label>
-        <input type="text" name="titulo" id="title">
+        <input type="text" name="titulo" id="title" class="form-control">
       </div>
 
       <div class="form-group">
         <label>Descripción</label>
-        <textarea name="descripcion"></textarea>
+        <textarea name="descripcion" class="form-control" style="height: 120px;"></textarea>
       </div>
 
       @include('templates.file_uploader_buttons')
