@@ -52,8 +52,7 @@ class Messenger implements MessengerInterface
 
         $response = json_decode(curl_exec($ch), true);
 
-        if (array_key_exists('error', $response))
-        {
+        if (array_key_exists('error', $response)) {
             Log::error($response['error']['message']);
             throw new MessengerApiException($response['error']['message']);
         }

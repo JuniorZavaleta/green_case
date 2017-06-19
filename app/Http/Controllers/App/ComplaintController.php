@@ -8,7 +8,11 @@ use Auth;
 use App\Models\Complaint;
 use App\Models\ContaminationType;
 use App\Models\Channel;
+use App\Models\District;
+
 use App\Services\ImageUpload;
+use App\Services\GMaps;
+use App\Services\LimaException;
 
 class ComplaintController extends Controller
 {
@@ -23,7 +27,7 @@ class ComplaintController extends Controller
         ));
     }
 
-    public function store(ImageUpload $image_uploader)
+    public function store(ImageUpload $image_uploader, GMaps $gmaps)
     {
         $this->validate(request(), [
             'contamination_type' => 'required',
@@ -33,7 +37,14 @@ class ComplaintController extends Controller
             'files.*'            => 'image'
         ]);
 
+        try {
+            $district_name = $gmaps->getDistrictName(request('latitude'), request('longitude'));
+        } catch (LimaException $e) {
+            return back()->withErrors(['ubicación' => $e->getMessage()]);
+        }
+
         $citizen = Auth::guard('web')->user();
+        $district = District::where('name', $district_name)->first();
 
         $complaint = Complaint::create([
             'citizen_id'            => $citizen->id,
@@ -42,7 +53,7 @@ class ComplaintController extends Controller
             'complaint_status_id'   => Complaint::COMPLETED,
             'latitude'              => request('latitude'),
             'longitude'             => request('longitude'),
-            'district_id'           => 1,
+            'district_id'           => $district->id,
             'commentary'            => request('commentary')
         ]);
 
