@@ -14,50 +14,49 @@
 @endif
 
 <div class="row">
-  <div class="col-xs-12">
-  <form class="form-horizontal" method="POST" enctype="multipart/form-data">
-    {!! csrf_field() !!}
-    <div class="form-container">
+  <div class="col-xs-12 col-sm-9">
+    <form id="fileupload" class="" method="POST" enctype="multipart/form-data">
+      {!! csrf_field() !!}
       <div class="form-group">
-        <div class="col-xs-3 col-xs-offset-1 col-sm-2">
-          <label class="control-label">Imagen 1</label>
-        </div>
-        <div class="col-xs-6 col-sm-8 col-lg-6">
-          <input type="file" name="image_1">
-        </div>
+        <label>Título</label>
+        <input type="text" name="titulo" id="title" class="form-control">
       </div>
+
       <div class="form-group">
-        <div class="col-xs-3 col-xs-offset-1 col-sm-2">
-          <label class="control-label">Imagen 2</label>
-        </div>
-        <div class="col-xs-6 col-sm-8 col-lg-6">
-          <input type="file" name="image_2">
-        </div>
+        <label>Descripción</label>
+        <textarea name="descripcion" class="form-control" style="height: 120px;"></textarea>
       </div>
-      <div class="form-group">
-        <div class="col-xs-3 col-xs-offset-1 col-sm-2">
-          <label class="control-label">Imagen 3</label>
-        </div>
-        <div class="col-xs-6 col-sm-8 col-lg-6">
-          <input type="file" name="image_3">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-3 col-xs-offset-1 col-sm-2">
-          <label class="control-label">Comentario</label>
-        </div>
-        <textarea rows="4" cols="50" name="commentary">
-        </textarea>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-6 col-xs-offset-1">
-          <button class="btn btn-primary btn-square" name="register_button" type="submit" value="register">Registrar</button>
-        </div>
-      </div>
-    </div>
-    <input type="hidden" name="latitude" id="latitude" value="{{ $default_latitude }}">
-    <input type="hidden" name="longitude" id="longitude" value="{{ $default_longitude }}">
-  </form>
+
+      @include('templates.file_uploader_buttons')
+
+      <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-upload"></i>
+        <span>Registrar</span>
+      </button>
+
+      <input type="hidden" name="latitude" id="latitude" value="{{ $default_latitude }}">
+      <input type="hidden" name="longitude" id="longitude" value="{{ $default_longitude }}">
+    </form>
+
+    @include('templates.file_uploader_table')
   </div>
 </div>
 @endsection
+
+@push('extra-js')
+<!-- Jquery Fileupload Plugin -->
+<script src="{{ asset('js/ui/widget.js') }}"></script>
+<script src="{{ asset('js/tmpl.js') }}"></script>
+<script src="{{ asset('js/load-image.all.min.js') }}"></script>
+<script src="{{ asset('/js/canvas-to-blob.js') }}"></script>
+<script src="{{ asset('/js/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('/js/jquery.fileupload-process.js') }}"></script>
+<script src="{{ asset('/js/jquery.fileupload-image.js') }}"></script>
+<script src="{{ asset('/js/jquery.fileupload-validate.js') }}"></script>
+<script src="{{ asset('/js/jquery.fileupload-ui.js') }}"></script>
+<!-- Settings jquery fileupload -->
+<script src="{{ asset('js/upload_images.js')}}"></script>
+@endpush
+
+@push('extra-css')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fileupload.css') }}">
+@endpush

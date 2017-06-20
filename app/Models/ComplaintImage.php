@@ -34,10 +34,6 @@ class ComplaintImage extends Model
             return env('BOT_HOST').$this->img;
         }
 
-        if ($this->complaint->type_communication_id == Channel::FACEBOOK) {
-            return asset('img/complaints/'.$this->img);
-        }
-
         return $this->img;
     }
 }

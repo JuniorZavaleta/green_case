@@ -39,7 +39,18 @@ class Messenger implements MessengerInterface
             ],
         ];
 
-        $json_message = json_encode($messenger_message);
+        $this->send($messenger_message);
+
+        if (array_key_exists('images', $data)) {
+            $this->sendImages($receiver, $data['images']);
+        }
+
+        return true;
+    }
+
+    public function send($message)
+    {
+        $json_message = json_encode($message);
 
         $ch = curl_init($this->graph_url);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -51,13 +62,41 @@ class Messenger implements MessengerInterface
         ]);
 
         $response = json_decode(curl_exec($ch), true);
+        curl_close($ch);
 
-        if (array_key_exists('error', $response))
-        {
+        if (array_key_exists('error', $response)) {
             Log::error($response['error']['message']);
             throw new MessengerApiException($response['error']['message']);
         }
+    }
 
-        return true;
+    public function sendImages($receiver, $images)
+    {
+        $elements = [];
+
+        foreach ($images as $index => $image) {
+            $number = $index + 1;
+            $elements[] = [
+                'title' => "Imagen #{$number}",
+                'image_url' => $image->img,
+            ];
+        }
+
+        $messenger_message = [
+            'recipient' => [
+                'id' => $receiver,
+            ],
+            'message' => [
+                'attachment' => [
+                    'type' => 'template',
+                    'payload' => [
+                        'template_type' => 'generic',
+                        'elements' => $elements,
+                    ]
+                ]
+            ],
+        ];
+
+        $this->send($messenger_message);
     }
 }

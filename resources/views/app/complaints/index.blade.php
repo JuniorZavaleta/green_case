@@ -9,8 +9,9 @@
   {{ session('message') }}
 </div>
 @endif
+
 @if (Auth::guard('web')->user())
-<div class="row">
+<div class="row mb-lg">
   <div class="text-center">
     <a class="btn btn-success btn-square" href="{{ route('complaint.create') }}" type="button" style="font-size: 20px;">
         ¡Registrar caso!
@@ -25,12 +26,13 @@
   <div class="text-center">¡Si deseas apoyarnos con algún caso que conozcas puedes registrarte con Facebook y registrarlo!</div>
 </div>
 @endif
-<div class="row" style="padding-top: 20px;">
+
+<div class="row mb-lg">
   @foreach ($complaints as $complaint)
   <div class="col-sm-4">
     <div class="panel">
       <a>
-        <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
+        <img class="img-responsive" src="{{ count($complaint->images) > 0 ? $complaint->images[0]->img_path : '' }}"/>
       </a>
       <div class="panel-body">
         <p class="clearfix">
