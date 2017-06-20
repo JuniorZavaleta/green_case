@@ -180,6 +180,8 @@ class ComplaintController extends Controller
 
             $complaint->citizen->sendNotification($subject, $view, $data);
 
+            $complaint->addRecord(Complaint::ACCEPTED);
+
             return redirect()->route('admin.complaint.index')
                 ->with('message', 'Caso aceptado exitosamente.');
         }
@@ -209,6 +211,8 @@ class ComplaintController extends Controller
             ];
 
             $complaint->citizen->sendNotification($subject, $view, $data);
+
+            $complaint->addRecord(Complaint::REJECTED);
 
             return redirect()->route('admin.complaint.index')
                 ->with('message', 'Caso rechazado exitosamente.');
