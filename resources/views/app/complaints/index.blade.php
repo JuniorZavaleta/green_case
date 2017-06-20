@@ -42,10 +42,9 @@
          en el distrito de <strong>{{ $complaint->district->name }}</strong>
          usando la plataforma <strong>{{ $complaint->channel->description }}</strong>
         </p>
-
       </div>
       <div class="text-right">
-          <a href="#" class="btn btn-warning btn-square" data-toggle="modal" data-target="#myModal" style="font-size: 15px;"><em class="fa fa-plus"></em> Ver más detalle</a>
+          <a class="btn btn-warning btn-square detail" data-complaint="{{ $complaint->images->toJson() }}" data-commentary="{{ $complaint->commentary }}" style="font-size: 15px;"><em class="fa fa-plus"></em> Ver más detalle</a>
         </div>
     </div>
   </div>
@@ -72,23 +71,7 @@
                 <h4 id="myModalLabel" class="modal-title">Detalle</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <a>
-                            <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a>
-                            <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a>
-                            <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
-                        </a>
-                    </div>
-                </div>
+                <div class="row" id="image-row"></div>
                 <div class="row">
                     <div class="form-group" style="width: 500px; margin-right: auto; margin-left: auto;">
                 <div class="col-xs-3 col-xs-offset-1 col-sm-2">
@@ -103,16 +86,12 @@
                         <div class="col-sm-12">
                             <div class="panel">
                                 <div class="panel-body">
-                                    <textarea rows="10" name="commentary" class="form-control note-editor"></textarea>
+                                    <textarea rows="10" name="commentary" id="commentary" class="form-control note-editor"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-square btn-danger">Confirmar Rechazo</button>
-                <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
             </div>
         </div>
     </div>
