@@ -61,7 +61,7 @@
 @push('modal')
 <!-- Modal-->
 <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close">
@@ -70,6 +70,31 @@
                 <h4 id="myModalLabel" class="modal-title">Detalle</h4>
             </div>
             <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a>
+                            <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a>
+                            <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a>
+                            <img class="img-responsive" src="http://cdne.diariocorreo.pe/thumbs/uploads/articles/images/contaminacion-visual-sin-control-en-huancayo-21239-jpg_604x0.jpg"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group" style="width: 500px; margin-right: auto; margin-left: auto;">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Ubicación</label>
+                </div>
+                <div id="map" class="col-xs-6 col-sm-8 col-lg-6"></div>
+            </div>
+                </div>
                 <fieldset>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Comentarios</label>
@@ -90,4 +115,30 @@
         </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}"></script>
+<script>
+var map;
+var marker;
+var uluru = {lat: {{ $complaint->latitude }}, lng: {{ $complaint->longitude }}};
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: uluru
+    });
+
+    marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+      draggable: true,
+    });
+}
+
+initMap();
+
+google.maps.event.addListener(marker, "dragend", function (event) {
+    document.getElementById("latitude").value = this.getPosition().lat();
+    document.getElementById("longitude").value = this.getPosition().lng();
+});
+</script>
 @endpush
