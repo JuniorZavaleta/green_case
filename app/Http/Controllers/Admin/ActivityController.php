@@ -49,6 +49,15 @@ class ActivityController extends Controller
             $activity->images()->create(['img' => $path]);
         }
 
+        $subject = 'Nueva actividad en su caso de contaminación';
+        $view = 'new_activity';
+        $data = [
+            'activity' => $activity,
+            'images' => $activity->images,
+        ];
+
+        $complaint->citizen->sendNotification($subject, $view, $data);
+
         return redirect()->route('admin.activity.index', compact('complaint'))
             ->with('message', 'Actividad registrada exitosamente.');
     }
