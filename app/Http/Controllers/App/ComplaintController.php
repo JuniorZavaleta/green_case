@@ -64,6 +64,8 @@ class ComplaintController extends Controller
             $complaint->images()->create(['img' => $path]);
         }
 
+        $complaint->addRecord(Complaint::COMPLETED);
+
         return redirect()->route('complaint.index')
             ->with('message', 'Gracias por registrar tu reclamo. Te enviaremos un correo sobre las actualizaciones de tu reclamo');
     }

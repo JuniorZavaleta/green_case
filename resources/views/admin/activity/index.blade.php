@@ -1,6 +1,13 @@
 @extends('admin.layout.base')
 
 @section('content')
+@if (session('access_denied'))
+<div class="row">
+  <div class="alert alert-warning">
+    {{ session('access_denied') }}
+  </div>
+</div>
+@endif
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">

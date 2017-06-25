@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('app.layout.base')
 
 @section('content')
 <div class="alert alert-danger">
