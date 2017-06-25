@@ -11,6 +11,12 @@
             <span data-localize="sidebar.nav.DASHBOARD">Lista de casos</span>
           </a>
         </li>
+        <li class="active">
+          <a href="{{ route('admin.authority.index') }}" title="Lista de autoridades" class="" aria-expanded="true">
+            <em class="icon-pencil"></em>
+            <span data-localize="sidebar.nav.DASHBOARD">Lista de autoridades</span>
+          </a>
+        </li>
         <li>
           <a href="{{ route('admin.logout') }}" title="Logout">
             <em class="fa fa-sign-out"></em>
