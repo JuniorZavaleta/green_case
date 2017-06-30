@@ -43,9 +43,18 @@
          usando la plataforma <strong>{{ $complaint->channel->description }}</strong>
         </p>
       </div>
-      <div class="text-right">
-          <a class="btn btn-warning btn-square detail" data-complaint="{{ $complaint->images->toJson() }}" data-commentary="{{ $complaint->commentary }}" style="font-size: 15px;"><em class="fa fa-plus"></em> Ver más detalle</a>
-        </div>
+      <div class="row">
+          <div class="col-md-6">
+            <div class="text-right">
+                <a href="{{ route('complaint.activities', ['complaint' => $complaint]) }}" class="btn btn-warning btn-square" style="font-size: 15px;"> Actividades</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-right">
+                <a class="btn btn-warning btn-square detail" data-complaint="{{ $complaint->images->toJson() }}" data-commentary="{{ $complaint->commentary }}" style="font-size: 15px;"><em class="fa fa-plus"></em> Ver más detalle</a>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
   @endforeach
