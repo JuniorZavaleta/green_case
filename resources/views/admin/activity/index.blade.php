@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-10">
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Lista de actividades del caso de contaminación #{{ $complaint->id }}</div>

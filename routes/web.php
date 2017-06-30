@@ -19,6 +19,7 @@ Route::group(['namespace' => 'App'], function () {
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
         Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
+        Route::get('caso/{complaint}/actividades', 'ComplaintController@getActivities')->name('complaint.activities');
     });
 
     Route::get('/login', 'FacebookController@login')->name('login');

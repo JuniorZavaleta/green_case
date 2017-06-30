@@ -3,11 +3,11 @@ $(document).ready(function(){
     var image = $('#image-row');
 
     $(document).on('click', '.detail', function(){
-
-        var complaints = $(this).data('complaint');
-
+        var complaints = [];
+        complaints = $(this).data('complaint');
+        console.log(complaints);
+        image.html('');
         $.each(complaints, function(i) {
-            console.log(complaints[i].img);
             image.append('<div class="col-md-4">'+
                         '<a>'+
                         '<img class="img-responsive" src="'+base_url+'/img/complaints/'+complaints[i].img+'"/>'+

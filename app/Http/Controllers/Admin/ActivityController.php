@@ -56,7 +56,7 @@ class ActivityController extends Controller
             'images' => $activity->images,
         ];
 
-        $complaint->citizen->sendNotification($subject, $view, $data);
+        //$complaint->citizen->sendNotification($subject, $view, $data);
 
         return redirect()->route('admin.activity.index', compact('complaint'))
             ->with('message', 'Actividad registrada exitosamente.');
