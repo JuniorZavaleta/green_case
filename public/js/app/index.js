@@ -5,7 +5,6 @@ $(document).ready(function(){
     $(document).on('click', '.detail', function(){
         var complaints = [];
         complaints = $(this).data('complaint');
-        console.log(complaints);
         image.html('');
         $.each(complaints, function(i) {
             image.append('<div class="col-md-4">'+

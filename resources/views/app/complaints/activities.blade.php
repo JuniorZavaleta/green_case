@@ -4,8 +4,8 @@
 <!-- START timeline-->
 <ul class="timeline">
    <li data-datetime="Today" class="timeline-separator"></li>
-   @foreach($complaint->activities as $activity)
-      @if($activity->id%2 == 0)
+   @foreach( $complaint->activities as $activity )
+      @if( $activity->id % 2 == 0 )
          <!-- START timeline item-->
          <li>
             <div class="timeline-badge primary">
