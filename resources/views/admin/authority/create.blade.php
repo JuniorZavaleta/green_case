@@ -41,7 +41,9 @@
         </div>
 
         <div class="form-group">
-          <button class="btn btn-primary" name="register_button" type="submit" value="register">Registrar</button>
+          <button class="btn btn-primary" name="register_button" type="submit" value="register">
+            <span class="icon-plus"></span> Registrar
+          </button>
         </div>
       </div>
     </form>

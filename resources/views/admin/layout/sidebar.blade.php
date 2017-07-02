@@ -13,7 +13,7 @@
         </li>
         <li {{{ (Request::is('admin/autoridades' . '*') ? 'class=active' : '') }}}>
           <a href="{{ route('admin.authority.index') }}" title="Lista de autoridades" class="" aria-expanded="true">
-            <em class="icon-pencil"></em>
+            <em class="icon-book-open"></em>
             <span data-localize="sidebar.nav.DASHBOARD">Lista de autoridades</span>
           </a>
         </li>
