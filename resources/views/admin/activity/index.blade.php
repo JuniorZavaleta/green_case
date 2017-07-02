@@ -30,8 +30,11 @@
             <td>{{ $activity->short_description }}</td>
             <td>{{ $activity->created_at }}</td>
             <td>
-              <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">Ver</a>
-              <a class="btn btn-default btn-square" href="{{ route('admin.activity.edit', compact('complaint', 'activity')) }}">Editar</a>
+              <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">
+                <span class="icon-eye"></span> Ver
+              </a>
+              <a class="btn btn-default btn-square" href="{{ route('admin.activity.edit', compact('complaint', 'activity')) }}">
+                <span class="icon-pencil"></span> Editar</a>
             </td>
           </tr>
           @endforeach
@@ -46,8 +49,12 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">Regresar</a>
-    <a class="btn btn-success btn-square" type="button" href="{{ route('admin.activity.create', compact('complaint')) }}">Agregar actividad</a>
+    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">
+      <span class="icon-action-undo"></span> Regresar
+    </a>
+    <a class="btn btn-success btn-square" type="button" href="{{ route('admin.activity.create', compact('complaint')) }}">
+      <span class="icon-briefcase"></span> Agregar actividad
+    </a>
   </div>
 </div>
 @endsection
