@@ -9,7 +9,7 @@ $(document).ready(function(){
         $.each(complaints, function(i) {
             image.append('<div class="col-md-4">'+
                         '<a>'+
-                        '<img class="img-responsive" src="'+base_url+'/img/complaints/'+complaints[i].img+'"/>'+
+                        '<img class="img-responsive" src="'+complaints[i].img+'"/>'+
                         '</a>'+
                         '</div>');
         });
