@@ -32,12 +32,12 @@ class AuthorityController extends Controller
             'nombre'      => 'required',
             'distrito'    => 'required',
             'e-mail'      => 'required|email',
-            'contrasenia' => 'required',
+            'password'    => 'required',
         ]);
 
         $user = User::create([
             'email'    => request('e-mail'),
-            'password' => bcrypt(request('contrasenia')),
+            'password' => bcrypt(request('password')),
             'type_user'=> User::AUTHORITY,
             'state'    => Authority::ACTIVE,
         ]);

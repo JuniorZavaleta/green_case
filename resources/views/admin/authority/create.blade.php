@@ -36,8 +36,8 @@
           <input type="text" class="form-control" name="e-mail" id="email">
         </div>
         <div class="form-group">
-          <label class="control-label">Contraseña</label>
-          <input type="password" class="form-control" name="contrasenia" id="password">
+          <label class="control-label">Password</label>
+          <input type="password" class="form-control" name="password" id="password">
         </div>
 
         <div class="form-group">
