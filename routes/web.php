@@ -15,11 +15,11 @@ Route::group(['namespace' => 'App'], function () {
     Route::get('/', 'IndexController@index')->name('complaint.index');
     Route::post('/ocultar_mensaje', 'IndexController@hideSupportMessage')->name('index.hide_message');
     Route::get('/siguientes_casos', 'IndexController@nextComplaints')->name('index.next_complaints');
+    Route::get('caso/{complaint}/actividades', 'ComplaintController@getActivities')->name('complaint.activities');
 
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
         Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
-        Route::get('caso/{complaint}/actividades', 'ComplaintController@getActivities')->name('complaint.activities');
     });
 
     Route::get('/login', 'FacebookController@login')->name('login');

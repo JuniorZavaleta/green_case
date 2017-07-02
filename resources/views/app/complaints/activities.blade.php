@@ -33,9 +33,6 @@
                            </div>
                         @endforeach
                      </div>
-                     <div class="text-right">
-                       <a class="btn btn-warning btn-square" type="button">Agregar actividad</a>
-                     </div>
                   </div>
                </div>
             </div>
