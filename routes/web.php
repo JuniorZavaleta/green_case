@@ -19,6 +19,7 @@ Route::group(['namespace' => 'App'], function () {
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/nuevo_caso', 'ComplaintController@create')->name('complaint.create');
         Route::post('/nuevo_caso', 'ComplaintController@store')->name('complaint.store');
+        Route::get('caso/{complaint}/actividades', 'ComplaintController@getActivities')->name('complaint.activities');
     });
 
     Route::get('/login', 'FacebookController@login')->name('login');
@@ -46,6 +47,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => '/admin'], function () {
         Route::get('/casos/{complaint}/actividades/{activity}', 'ActivityController@show')->name('admin.activity.show');
         Route::get('/casos/{complaint}/actividades/{activity}/editar', 'ActivityController@edit')->name('admin.activity.edit');
         Route::post('/casos/{complaint}/actividades/{activity}/editar', 'ActivityController@update')->name('admin.activity.update');
+
+        Route::get('/autoridades', 'AuthorityController@index')->name('admin.authority.index');
+        Route::get('/autoridades/nueva', 'AuthorityController@create')->name('admin.authority.create');
+        Route::post('/autoridades/nueva', 'AuthorityController@store')->name('admin.authority.store');
 
         Route::get('/logout', 'AuthController@logout')->name('admin.logout');
     });

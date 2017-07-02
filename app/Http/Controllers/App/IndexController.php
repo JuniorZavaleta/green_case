@@ -21,9 +21,6 @@ class IndexController extends Controller
             session(['show_support_message' => true]);
         }
 
-        // foreach ($complaints as $complaint) {
-        //     dd($complaint->images->toJson());
-        // }
         return view('app.complaints.index', compact('complaints'));
     }
 
