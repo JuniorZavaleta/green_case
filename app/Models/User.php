@@ -20,7 +20,6 @@ class User extends Authenticatable
 
     const ADMIN     = 1;
     const AUTHORITY = 2;
-    const CITIZEN   = 3;
 
     /**
      * The attributes that should be hidden for arrays.
