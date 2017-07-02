@@ -83,7 +83,7 @@ class Telegram implements MessengerInterface
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
-        $result = curl_exec($ch);
+        $result = json_decode(curl_exec($ch), true);
 
         if (isset($result['ok']) && $result['ok']) {
             return true;
