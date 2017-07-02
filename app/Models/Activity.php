@@ -53,4 +53,13 @@ class Activity extends Model
 
         return $description;
     }
+
+    /**
+     * Return if the selected activity is the last activity of the complaint
+     * @return bool
+     */
+    public function getIsLastAttribute()
+    {
+        return $this->complaint->activities()->latest()->first()->id == $this->id;
+    }
 }

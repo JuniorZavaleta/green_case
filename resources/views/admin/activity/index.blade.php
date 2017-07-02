@@ -30,7 +30,8 @@
             <td>{{ $activity->short_description }}</td>
             <td>{{ $activity->created_at }}</td>
             <td>
-                <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">Ver</a>
+              <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">Ver</a>
+              <a class="btn btn-default btn-square" href="{{ route('admin.activity.edit', compact('complaint', 'activity')) }}">Editar</a>
             </td>
           </tr>
           @endforeach

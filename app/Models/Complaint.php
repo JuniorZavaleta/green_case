@@ -37,7 +37,7 @@ class Complaint extends Model
     const ACCEPTED = 3;
     const REJECTED = 4;
     const ON_ATTENTION = 5;
-    const ATTENDED = 6;
+    const FINISHED = 6;
 
     /**
      * Relationship with the citizen
@@ -159,12 +159,12 @@ class Complaint extends Model
     {
         return $this->complaint_status_id == static::ACCEPTED
             || $this->complaint_status_id == static::ON_ATTENTION
-            || $this->complaint_status_id == static::ATTENDED;
+            || $this->complaint_status_id == static::FINISHED;
     }
 
-    public function getIsAttendedAttribute()
+    public function getIsFinishedAttribute()
     {
-        return $this->complaint_status_id == static::ATTENDED;
+        return $this->complaint_status_id == static::FINISHED;
     }
 
     /**
