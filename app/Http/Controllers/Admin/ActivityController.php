@@ -86,4 +86,14 @@ class ActivityController extends Controller
     {
         return view('admin.activity.show', compact('complaint', 'activity'));
     }
+
+    public function edit(Complaint $complaint, Activity $activity)
+    {
+
+    }
+
+    public function update(Complaint $complaint, Activity $activity)
+    {
+
+    }
 }
