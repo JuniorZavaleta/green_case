@@ -42,15 +42,21 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <a href="{{ route('admin.complaint.accepted', compact('complaint')) }}" class="btn btn-square btn-primary" type="button">Aceptar Caso</a>
-                        <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-square btn-danger">Rechazar Caso</a>
+                        <a href="{{ route('admin.complaint.accepted', compact('complaint')) }}" class="btn btn-square btn-primary" type="button">
+                          <span class="icon-check"></span> Aceptar Caso
+                        </a>
+                        <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-square btn-danger">
+                          <span class="icon-close"></span> Rechazar Caso
+                        </a>
                     </div>
                 </div>
                 <hr></hr>
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">Regresar</a>
+                    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">
+                      <span class="icon-action-undo"></span> Regresar
+                    </a>
                 </div>
             </div>
         </div>
@@ -100,8 +106,12 @@
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-square btn-danger">Confirmar Rechazo</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                    <button type="submit" class="btn btn-square btn-danger">
+                      <span class="icon-check"></span> Confirmar Rechazo
+                    </button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                      <span class="icon-close"></span> Cancelar
+                    </button>
                 </div>
             </form>
         </div>

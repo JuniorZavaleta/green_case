@@ -42,7 +42,9 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">Regresar</a>
+                    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">
+                      <span class="icon-action-undo"></span> Regresar
+                    </a>
                 </div>
             </div>
         </div>
