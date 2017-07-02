@@ -1,8 +1,15 @@
 @extends('admin.layout.base')
 
 @section('content')
+@if (session('access_denied'))
 <div class="row">
-  <div class="col-xs-12">
+  <div class="alert alert-warning">
+    {{ session('access_denied') }}
+  </div>
+</div>
+@endif
+<div class="row">
+  <div class="col-xs-10">
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Lista de actividades del caso de contaminación #{{ $complaint->id }}</div>
@@ -23,7 +30,8 @@
             <td>{{ $activity->short_description }}</td>
             <td>{{ $activity->created_at }}</td>
             <td>
-                <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">Ver</a>
+              <a class="btn btn-default btn-square" href="{{ route('admin.activity.show', compact('complaint', 'activity')) }}">Ver</a>
+              <a class="btn btn-default btn-square" href="{{ route('admin.activity.edit', compact('complaint', 'activity')) }}">Editar</a>
             </td>
           </tr>
           @endforeach

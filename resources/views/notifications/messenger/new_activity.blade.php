@@ -1,6 +1,6 @@
 ¡Tenemos noticias!
 
-Se ha realizado una nueva actividad sobre tu caso de contaminación
+{{ $message }}
 
 {{ $activity->title }}:
 {{ $activity->description }}

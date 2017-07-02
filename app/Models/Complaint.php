@@ -37,7 +37,7 @@ class Complaint extends Model
     const ACCEPTED = 3;
     const REJECTED = 4;
     const ON_ATTENTION = 5;
-    const ATTENDED = 6;
+    const FINISHED = 6;
 
     /**
      * Relationship with the citizen
@@ -94,12 +94,21 @@ class Complaint extends Model
     }
 
     /**
-     * Relationship with
+     * Relationship with activities
      * @return App\Models\Activity
      */
     public function activities()
     {
         return $this->hasMany(Activity::class);
+    }
+
+    /**
+     * Relationship with records
+     * @return App\Models\ComplaintRecord
+     */
+    public function records()
+    {
+        return $this->hasMany(ComplaintRecord::class);
     }
 
     /**
@@ -148,8 +157,22 @@ class Complaint extends Model
      */
     public function getIsApprovedAttribute()
     {
-        return $this->complaint_status_id == static::ACCEPTED ||
-            $this->complaint_status_id == static::ON_ATTENTION ||
-            $this->complaint_status_id == static::ATTENDED;
+        return $this->complaint_status_id == static::ACCEPTED
+            || $this->complaint_status_id == static::ON_ATTENTION
+            || $this->complaint_status_id == static::FINISHED;
+    }
+
+    public function getIsFinishedAttribute()
+    {
+        return $this->complaint_status_id == static::FINISHED;
+    }
+
+    /**
+     * Create a record status when change the status
+     * @param int $status
+     */
+    public function addRecord($status)
+    {
+        $this->records()->create(['complaint_status_id' => $status]);
     }
 }

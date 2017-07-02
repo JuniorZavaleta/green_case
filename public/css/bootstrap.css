@@ -2504,7 +2504,6 @@ input[type="search"] {
 }
 input[type="radio"],
 input[type="checkbox"] {
-  margin: 4px 0 0;
   margin-top: 1px \9;
   line-height: normal;
 }
@@ -5003,7 +5002,7 @@ a.thumbnail.active {
   color: #515253;
 }
 .alert {
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 21px;
   border: 1px solid transparent;
   border-radius: 0px;

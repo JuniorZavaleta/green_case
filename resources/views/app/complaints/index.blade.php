@@ -42,11 +42,19 @@
          en el distrito de <strong>{{ $complaint->district->name }}</strong>
          usando la plataforma <strong>{{ $complaint->channel->description }}</strong>
         </p>
-
       </div>
-      <div class="text-right">
-          <a href="#" class="btn btn-warning btn-square" data-toggle="modal" data-target="#myModal" style="font-size: 15px;"><em class="fa fa-plus"></em> Ver más detalle</a>
-        </div>
+      <div class="row">
+          <div class="col-md-6">
+            <div class="text-right">
+                <a href="{{ route('complaint.activities', ['complaint' => $complaint]) }}" class="btn btn-warning btn-square" style="font-size: 15px;"> Actividades</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-right">
+                <a class="btn btn-warning btn-square detail" data-complaint="{{ $complaint->images->toJson() }}" data-commentary="{{ $complaint->commentary }}" style="font-size: 15px;"><em class="fa fa-plus"></em> Ver más detalle</a>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
   @endforeach
@@ -63,7 +71,7 @@
 @push('modal')
 <!-- Modal-->
 <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close">
@@ -72,24 +80,55 @@
                 <h4 id="myModalLabel" class="modal-title">Detalle</h4>
             </div>
             <div class="modal-body">
+                <div class="row" id="image-row"></div>
+                <div class="row">
+                    <div class="form-group" style="width: 500px; margin-right: auto; margin-left: auto;">
+                <div class="col-xs-3 col-xs-offset-1 col-sm-2">
+                    <label class="control-label">Ubicación</label>
+                </div>
+                <div id="map" class="col-xs-6 col-sm-8 col-lg-6"></div>
+            </div>
+                </div>
                 <fieldset>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Comentarios</label>
                         <div class="col-sm-12">
                             <div class="panel">
                                 <div class="panel-body">
-                                    <textarea rows="10" name="commentary" class="form-control note-editor"></textarea>
+                                    <textarea rows="10" name="commentary" id="commentary" class="form-control note-editor"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </fieldset>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-square btn-danger">Confirmar Rechazo</button>
-                <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-            </div>
         </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}"></script>
+<script>
+var map;
+var marker;
+var uluru = {lat: {{ $complaint->latitude }}, lng: {{ $complaint->longitude }}};
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: uluru
+    });
+
+    marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+      draggable: true,
+    });
+}
+
+initMap();
+
+google.maps.event.addListener(marker, "dragend", function (event) {
+    document.getElementById("latitude").value = this.getPosition().lat();
+    document.getElementById("longitude").value = this.getPosition().lng();
+});
+</script>
 @endpush

@@ -29,6 +29,14 @@
 
       @include('templates.file_uploader_buttons')
 
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input name="last_activity" value="1" type="checkbox">¿Es la última actividad?
+          </label>
+        </div>
+      </div>
+
       <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-upload"></i>
         <span>Registrar</span>
       </button>
