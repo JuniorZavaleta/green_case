@@ -34,8 +34,12 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">Regresar</a>
-    <a class="btn btn-success btn-square" type="button" href="{{ route('admin.authority.create', compact('complaint')) }}">Agregar autoridad</a>
+    <a class="btn btn-default btn-square" href="{{ route('admin.complaint.index') }}">
+      <span class="icon-action-undo"></span> Regresar
+    </a>
+    <a class="btn btn-success btn-square" type="button" href="{{ route('admin.authority.create', compact('complaint')) }}">
+      <span class="icon-pencil"></span> Agregar autoridad
+    </a>
   </div>
 </div>
 @endsection
