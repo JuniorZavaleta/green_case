@@ -75,7 +75,8 @@ class ActivityController extends Controller
         $view = 'new_activity';
         $data = [
             'activity' => $activity,
-            'images' => $activity->images,
+            'images'   => $activity->images,
+            'message'  => $message,
         ];
 
         $complaint->citizen->sendNotification($subject, $view, $data);

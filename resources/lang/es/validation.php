@@ -119,6 +119,7 @@ return [
     'attributes' => [
         'contamination_type' => 'tipo de contaminación',
         'commentary'         => 'comentario',
+        'files'              => 'imágenes',
     ],
 
 ];

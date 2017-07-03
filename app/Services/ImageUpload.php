@@ -14,7 +14,9 @@ class ImageUpload
     public function save($file_image, $image_name)
     {
         $path = $image_name.'.'.$file_image->getClientOriginalExtension();
-        Image::make($file_image->getRealPath())->save(public_path($path));
+        Image::make($file_image->getRealPath())->resize(500, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path($path));
 
         return url($path);
     }

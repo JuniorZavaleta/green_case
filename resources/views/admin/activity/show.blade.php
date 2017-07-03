@@ -31,7 +31,9 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <a class="btn btn-default btn-square" href="{{ route('admin.activity.index', compact('complaint')) }}">Regresar</a>
+                    <a class="btn btn-default btn-square" href="{{ route('admin.activity.index', compact('complaint')) }}">
+                      <span class="icon-action-undo"></span> Regresar
+                    </a>
                 </div>
             </div>
         </div>
