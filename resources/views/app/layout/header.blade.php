@@ -9,8 +9,8 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="{{ url('/') }}">
-          <img src="{{ asset('img/logo.png') }}" alt="GreenCase">
-          <h1 class="title-logo">GreenCase</h1>
+          <img src="{{ asset('img/logo.png') }}" style="right: 10px" alt="GreenCase">
+
         </a>
       </div><!-- / navbar-header -->
       <div class="navbar-collapse collapse">
