@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- favicon -->
-    <link rel="icon" href="http://kingstudio.ro/demos/incart/images/favicon.png">
+    <link rel="icon" href="{{ asset('img/logo.ico') }}">
     <!-- page title -->
     <title>GreenCase</title>
     <!-- bootstrap css -->
